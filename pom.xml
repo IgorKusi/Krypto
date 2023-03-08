@@ -13,6 +13,26 @@
         <module>View</module>
     </modules>
 
+        <developers>
+        <developer>
+            <id>242454</id>
+            <name>Grzegorz Ludziejewski</name>
+            <email>242454@edu.p.lodz.pl</email>
+        </developer>
+        <developer>
+            <id>242442</id>
+            <name>Igor Kusideł</name>
+            <email>242442@edu.p.lodz.pl</email>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>The MIT License</name>
+            <url>license.txt</url>
+        </license>
+    </licenses>
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
