@@ -9,5 +9,4 @@ public class Util {
         return new BigInteger(64, new Random());
     }
 
-
 }
