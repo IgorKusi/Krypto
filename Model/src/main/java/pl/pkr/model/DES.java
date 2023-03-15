@@ -1,8 +1,13 @@
 package pl.pkr.model;
 
 import pl.pkr.model.Util.Pair;
-import static pl.pkr.model.DES.KeyManipulation.applyPC1;
-import static pl.pkr.model.DES.KeyManipulation.getSubkeys;
+
+import java.nio.charset.StandardCharsets;
+import java.util.BitSet;
+
+import static pl.pkr.model.DES.KeyManipulation.*;
+import static pl.pkr.model.DES.TextManipulation.*;
+import static pl.pkr.model.DES.TextManipulation.Feistel.*;
 
 
 public class DES {
@@ -16,6 +21,65 @@ public class DES {
         this.subkeys = getSubkeys(this.keyHalves);
     }
 
+    public String encryptString(String string) {
+        byte[] allBytes = string.getBytes(StandardCharsets.UTF_8);
+        byte[] buffer = new byte[8];
+        int lastByte = 0;
+        StringBuilder ret = new StringBuilder();
+
+        for (int i = 0; i < allBytes.length; i++) {
+            buffer[i % 8] = allBytes[i];
+            lastByte = i % 8;
+
+            if ((i + 1) % 8 == 0) {
+                boolean[] encrypted = encrypt(byte_arr_to_bits_64(buffer));
+                ret.append(new String(bits_64_to_byte_arr(encrypted)));
+            }
+        }
+
+        if (lastByte != 7) {
+            boolean[] encrypted = encrypt(byte_arr_to_bits_64(buffer));
+            ret.append(new String(bits_64_to_byte_arr(encrypted)));
+        }
+
+        return ret.toString();
+    }
+
+    public String decryptString(String string) {
+        this.subkeys = reverseSubkeys(this.subkeys);
+        String ret = encryptString(string);
+        this.subkeys = reverseSubkeys(this.subkeys);
+        return ret;
+    }
+
+    public boolean[] encrypt(boolean[] block_64) {
+        block_64 = applyIP(block_64);
+        Pair<boolean[]> halves = split_64_in_halves(block_64);
+
+        for (int i = 0; i < 16; ++i) {
+            halves = round(halves, i);
+        }
+
+        block_64 = connect_halves_to_64(halves.left(), halves.right());
+        block_64 = applyFP(block_64);
+
+        return block_64;
+    }
+
+    public boolean[] decrypt(boolean[] block_64) {
+        this.subkeys = reverseSubkeys(subkeys);
+        boolean[] ret = encrypt(block_64);
+        this.subkeys = reverseSubkeys(subkeys);
+        return ret;
+    }
+
+
+    Pair<boolean[]> round(Pair<boolean[]> block_halves_32, int round_index) {
+        boolean[] arr = feistel(block_halves_32.right(), this.subkeys[round_index]);
+        arr = xor(block_halves_32.left(), arr);
+
+        return new Pair<>(block_halves_32.right(), arr);
+    }
 
 
 
@@ -81,7 +145,7 @@ public class DES {
                 return ret;
             }
 
-            public static boolean[][] split_48_to_6(boolean[] block_48) {
+            public static boolean[][] split_48_to_8x6(boolean[] block_48) {
                 boolean[][] ret = new boolean[8][6];
 
                 for (int box = 0; box < 8; ++box) {
@@ -105,7 +169,7 @@ public class DES {
                 return new Pair<>(outer2, inner4);
             }
 
-            public static int bool_arr_to_int(boolean[] arr) {
+            public static int bits_to_int(boolean[] arr) {
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < arr.length; i++) {
                     sb.append(arr[i] ? "1" : "0");
@@ -136,7 +200,7 @@ public class DES {
 
                 return ret;
             }
-            
+
             public static boolean[] applyP(boolean[] block_32) {
                 boolean[] ret = new boolean[32];
 
@@ -145,22 +209,60 @@ public class DES {
 
                 return ret;
             }
+
+
+            public static boolean[] feistel(boolean[] block_32, boolean[] subkey_48) {
+                boolean[] block_48 = applyE(block_32);
+                block_48 = xor(block_48, subkey_48);
+                boolean[][] boxes = split_48_to_8x6(block_48);
+
+                boolean[][] s_out_boxes = new boolean[8][4];
+                for (int i = 0; i < 8; i++) {
+                    Pair<boolean[]> s_input_bit = pick_outer_2_and_inner_4(boxes[i]);
+                    Pair<Integer> s_input = new Pair<>(
+                            bits_to_int(s_input_bit.outer()),
+                            bits_to_int(s_input_bit.inner())
+                    );
+                    int s_output = Util.S_Box[i][s_input.outer()][s_input.inner()];
+                    s_out_boxes[i] = int_to_bit_4(s_output);
+                }
+
+                boolean[] linked_s_out = connect_4_to_32(s_out_boxes);
+                return applyP(linked_s_out);
+            }
+
+            public static boolean[] byte_arr_to_bits_64(byte[] bytes) {
+                boolean[] ret = new boolean[64];
+                BitSet bits = BitSet.valueOf(bytes);
+
+                for (int i = 0; i < 64; ++i) {
+                    ret[i] = bits.get(i);
+                }
+
+                return ret;
+            }
+
+            public static byte[] bits_64_to_byte_arr(boolean[] bits) {
+                byte[] ret = new byte[8];
+
+                byte b = 0b00000000;
+                for (int i = 0; i < 64; ++i) {
+                    b |= bits[i] ? 0b00000001 : 0;
+                    b <<= 1;
+
+                    if ((i + 1) % 8 == 0) {
+                        ret[i / 8] = b;
+                        b = 0b00000000;
+                    }
+                }
+
+                return ret;
+            }
         }
     }
 
 
     public static class KeyManipulation {
-        public static boolean[] discard8thBits(boolean[] key_64) {
-            boolean[] ret = new boolean[56];
-            for (int i = 0, j = 0; i < 64; ++i) {
-                if (i+1 % 8 == 0) continue;
-                ret[j] = key_64[i];
-                ++j;
-            }
-
-            return ret;
-        }
-
         public static Pair<boolean[]> applyPC1(boolean[] key_64) {
             boolean[] left = new boolean[28],
                       right = new boolean[28];
