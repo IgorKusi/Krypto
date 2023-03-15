@@ -6,7 +6,6 @@ import pl.pkr.model.Util;
 
 import java.io.*;
 import java.math.BigInteger;
-import java.util.Arrays;
 import java.util.BitSet;
 
 public class CipherController {
@@ -19,14 +18,14 @@ public class CipherController {
     public TextField txt_key3;
 
 
-    public void onGenKeysButtonClick() {
-        BigInteger b = Util.generateKey(); 
+        public void onGenKeysButtonClick() {
+        BigInteger b = Util.generateKey();
         Static.key1 = BitSet.valueOf(b.toByteArray());
         Static.s_key1 = b.toString(16).toUpperCase();
-        b = Util.generateKey(); 
+        b = Util.generateKey();
         Static.key2 = BitSet.valueOf(b.toByteArray());
         Static.s_key2 = b.toString(16).toUpperCase();
-        b = Util.generateKey(); 
+        b = Util.generateKey();
         Static.key3 = BitSet.valueOf(b.toByteArray());
         Static.s_key3 = b.toString(16).toUpperCase();
 
@@ -78,19 +77,27 @@ public class CipherController {
     }
 
     public void onLoadPlainButtonClick() {
-
+        File loadFile = ViewUtil.getFileChooser("Select file to load.").showOpenDialog(new Stage());
+        txt_area_plaintext.setText(ViewUtil.readFile(loadFile));
+        txt_plain_path.setText(loadFile.getAbsolutePath());
     }
 
     public void onSavePlainButtonClick() {
-
+        File saveFile = ViewUtil.saveFile(txt_area_plaintext.getText());
+        if (saveFile != null)
+            txt_plain_path.setText(saveFile.getAbsolutePath());
     }
 
     public void onLoadCipherButtonClick() {
-
+        File loadFile = ViewUtil.getFileChooser("Select file to load.").showOpenDialog(new Stage());
+        txt_area_ciphertext.setText(ViewUtil.readFile(loadFile));
+        txt_cipher_path.setText(loadFile.getAbsolutePath());
     }
 
     public void onSaveCipherButtonClick() {
-
+        File saveFile = ViewUtil.saveFile(txt_area_ciphertext.getText());
+        if (saveFile != null)
+            txt_cipher_path.setText(saveFile.getAbsolutePath());
     }
 
     public void onEncryptButtonClick() {
