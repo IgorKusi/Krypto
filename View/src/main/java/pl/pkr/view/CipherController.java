@@ -6,6 +6,8 @@ import pl.pkr.model.Util;
 
 import java.io.*;
 import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.BitSet;
 
 public class CipherController {
     public TextField txt_plain_path;
@@ -18,26 +20,39 @@ public class CipherController {
 
 
     public void onGenKeysButtonClick() {
-        Static.key1 = Util.generateKey();
-        Static.key2 = Util.generateKey();
-        Static.key3 = Util.generateKey();
+        BigInteger b = Util.generateKey(); 
+        Static.key1 = BitSet.valueOf(b.toByteArray());
+        Static.s_key1 = b.toString(16).toUpperCase();
+        b = Util.generateKey(); 
+        Static.key2 = BitSet.valueOf(b.toByteArray());
+        Static.s_key2 = b.toString(16).toUpperCase();
+        b = Util.generateKey(); 
+        Static.key3 = BitSet.valueOf(b.toByteArray());
+        Static.s_key3 = b.toString(16).toUpperCase();
 
-        txt_key1.setText(Static.key1.toString(16).toUpperCase());
-        txt_key2.setText(Static.key2.toString(16).toUpperCase());
-        txt_key3.setText(Static.key3.toString(16).toUpperCase());
+        txt_key1.setText(Static.s_key1);
+        txt_key2.setText(Static.s_key2);
+        txt_key3.setText(Static.s_key3);
     }
 
     public void onLoadKeysButtonClick() {
         File saveFile = ViewUtil.getFileChooser("Select file to load.").showOpenDialog(new Stage());
+        if (saveFile == null) return;
 
         try (BufferedReader br = new BufferedReader(new FileReader(saveFile))) {
-            Static.key1 = new BigInteger(br.readLine(), 16);
-            Static.key2 = new BigInteger(br.readLine(), 16);
-            Static.key3 = new BigInteger(br.readLine(), 16);
+            BigInteger b = new BigInteger(br.readLine(), 16);
+            Static.key1 = BitSet.valueOf(b.toByteArray());
+            Static.s_key1 = b.toString(16).toUpperCase();
+            b = new BigInteger(br.readLine(), 16);
+            Static.key2 = BitSet.valueOf(b.toByteArray());
+            Static.s_key2 = b.toString(16).toUpperCase();
+            b = new BigInteger(br.readLine(), 16);
+            Static.key3 = BitSet.valueOf(b.toByteArray());
+            Static.s_key3 = b.toString(16).toUpperCase();
 
-            txt_key1.setText(Static.key1.toString(16).toUpperCase());
-            txt_key2.setText(Static.key2.toString(16).toUpperCase());
-            txt_key3.setText(Static.key3.toString(16).toUpperCase());
+            txt_key1.setText(Static.s_key1);
+            txt_key2.setText(Static.s_key2);
+            txt_key3.setText(Static.s_key3);
 
         } catch (IOException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.NO).show();
@@ -46,13 +61,14 @@ public class CipherController {
 
     public void onSaveKeysButtonClick() {
         File saveFile = ViewUtil.getFileChooser("Select save path.").showSaveDialog(new Stage());
+        if (saveFile == null) return;
 
         try (FileWriter fw = new FileWriter(saveFile)) {
-            fw.write(Static.key1.toString(16).toUpperCase());
+            fw.write(Static.s_key1);
             fw.write("\n");
-            fw.write(Static.key2.toString(16).toUpperCase());
+            fw.write(Static.s_key2);
             fw.write("\n");
-            fw.write(Static.key3.toString(16).toUpperCase());
+            fw.write(Static.s_key3);
             fw.write("\n");
             fw.flush();
 
