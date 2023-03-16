@@ -10,6 +10,8 @@ import java.io.IOException;
 public class CipherApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(CipherApp.class.getResource("cipher-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setResizable(false);

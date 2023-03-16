@@ -2,6 +2,11 @@ package pl.pkr.model;
 
 import pl.pkr.model.Util.Pair;
 
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.CoderResult;
 import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
 
@@ -22,6 +27,31 @@ public class DES {
     }
 
     public String encryptString(String string) {
+//        Charset cs = StandardCharsets.UTF_8;
+//        CharsetEncoder ce = cs.newEncoder();
+//        ByteBuffer out = ByteBuffer.allocate(8);
+//        CharBuffer in = CharBuffer.wrap(string);
+//        StringBuilder encr = new StringBuilder();
+//
+//        while (true) {
+//            CoderResult cr = ce.encode(in, out, true);
+//            byte[] bufContent = new byte[8];
+////            out.
+////            out.get(bufContent);
+//            encr.append(new String(
+//                    bits_64_to_byte_arr(encrypt(
+//                            byte_arr_to_bits_64(out.array())
+//                    ))
+//            ));
+//            out.clear();
+//            if ( !cr.isOverflow() )
+//                break;
+//        }
+//
+//        return encr.toString();
+
+
+
         byte[] allBytes = string.getBytes(StandardCharsets.UTF_8);
         byte[] buffer = new byte[8];
         int lastByte = 0;
@@ -34,14 +64,18 @@ public class DES {
             if ((i + 1) % 8 == 0) {
                 boolean[] encrypted = encrypt(byte_arr_to_bits_64(buffer));
                 ret.append(new String(bits_64_to_byte_arr(encrypted)));
+                System.out.println(Util.bits_to_numeric(byte_arr_to_bits_64(buffer)));
+                buffer = new byte[8];
             }
         }
 
         if (lastByte != 7) {
             boolean[] encrypted = encrypt(byte_arr_to_bits_64(buffer));
             ret.append(new String(bits_64_to_byte_arr(encrypted)));
+            System.out.println(Util.bits_to_numeric(byte_arr_to_bits_64(buffer)));
         }
 
+        System.out.println(ret.toString());
         return ret.toString();
     }
 
@@ -76,7 +110,7 @@ public class DES {
 
     Pair<boolean[]> round(Pair<boolean[]> block_halves_32, int round_index) {
         boolean[] arr = feistel(block_halves_32.right(), this.subkeys[round_index]);
-        arr = xor(block_halves_32.left(), arr);
+        arr = xor(block_halves_32.left(), arr, 32);
 
         return new Pair<>(block_halves_32.right(), arr);
     }
@@ -163,11 +197,11 @@ public class DES {
                 return ret;
             }
 
-            public static boolean[] xor(boolean[] block_48, boolean[] subkey_48) {
-                boolean[] ret = new boolean[48];
+            public static boolean[] xor(boolean[] arr1, boolean[] arr2, int size) {
+                boolean[] ret = new boolean[size];
 
-                for (int i = 0; i < 48; ++i)
-                    ret[i] = block_48[i] ^ subkey_48[i];
+                for (int i = 0; i < size; ++i)
+                    ret[i] = arr1[i] ^ arr2[i];
 
                 return ret;
             }
@@ -177,7 +211,7 @@ public class DES {
 
                 for (int box = 0; box < 8; ++box) {
                     for (int bit = 0; bit < 6; bit++) {
-                        ret[box][bit] = block_48[8 * box + bit];
+                        ret[box][bit] = block_48[(6 * box) + bit];
                     }
                 }
 
@@ -240,7 +274,7 @@ public class DES {
 
             public static boolean[] feistel(boolean[] block_32, boolean[] subkey_48) {
                 boolean[] block_48 = applyE(block_32);
-                block_48 = xor(block_48, subkey_48);
+                block_48 = xor(block_48, subkey_48, 48);
                 boolean[][] boxes = split_48_to_8x6(block_48);
 
                 boolean[][] s_out_boxes = new boolean[8][4];

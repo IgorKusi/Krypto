@@ -103,14 +103,13 @@ public class CipherController {
 
 
     public void onEncryptButtonClick() {
-            DES des = new DES(DES.TextManipulation.byte_arr_to_bits_64(Static.key1.toByteArray()));
+            DES des = new DES(DES.TextManipulation.byte_arr_to_bits_64(Static.s_key1.getBytes()));
             txt_area_ciphertext.setText(des.encryptString(txt_area_plaintext.getText()));
     }
 
     public void onDecryptButtonClick() {
-            DES des = new DES(DES.TextManipulation.byte_arr_to_bits_64(Static.key1.toByteArray()));
+            DES des = new DES(DES.TextManipulation.byte_arr_to_bits_64(Static.s_key1.getBytes()));
             txt_area_plaintext.setText( des.decryptString(txt_area_ciphertext.getText()) );
-
     }
 
 

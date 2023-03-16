@@ -7,6 +7,17 @@ import java.util.Random;
 
 public class Util {
 
+    public static String bits_to_numeric(boolean[] bits) {
+        StringBuilder sb = new StringBuilder(bits.length);
+
+        for (int i = 0; i < bits.length; ++i) {
+            sb.append(bits[i] ? "1" : "0");
+            if ((i + 1) % 8 == 0) sb.append(" ");
+        }
+
+        return sb.toString();
+    }
+
     public static BigInteger generateKey() {
         return new BigInteger(64, new Random());
     }
@@ -83,7 +94,7 @@ public class Util {
 
     public static final int[] P = new int[] {
             15, 6,  19, 20, 28, 11, 27, 16,
-             0, 14, 22, 25,  4, 17, 32, 11,
+             0, 14, 22, 25,  4, 17, 30, 11,
              1,  7, 23, 13, 31, 26,  2,  8,
             18, 12, 29,  5, 21, 10,  3, 24
 
