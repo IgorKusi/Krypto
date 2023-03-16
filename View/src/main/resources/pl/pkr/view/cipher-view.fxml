@@ -10,15 +10,15 @@
 
 <Pane maxHeight="800.0" maxWidth="750.0" minHeight="800.0" minWidth="750.0" prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.pkr.view.CipherController">
    <children>
-      <TextField fx:id="txt_key1" layoutX="15.0" layoutY="41.0" prefHeight="25.0" prefWidth="528.0" promptText="Key 1">
+      <TextField fx:id="txt_key1" layoutX="15.0" layoutY="41.0" prefHeight="25.0" prefWidth="500.0" promptText="Key 1">
          <font>
             <Font name="Monospaced Regular" size="12.0" />
          </font></TextField>
-      <TextField fx:id="txt_key2" layoutX="15.0" layoutY="66.0" prefHeight="25.0" prefWidth="528.0" promptText="Key 2">
+      <TextField fx:id="txt_key2" layoutX="15.0" layoutY="66.0" prefHeight="25.0" prefWidth="500.0" promptText="Key 2">
          <font>
             <Font name="Monospaced Regular" size="12.0" />
          </font></TextField>
-      <TextField fx:id="txt_key3" layoutX="15.0" layoutY="91.0" prefHeight="25.0" prefWidth="528.0" promptText="Key 3">
+      <TextField fx:id="txt_key3" layoutX="15.0" layoutY="91.0" prefHeight="25.0" prefWidth="500.0" promptText="Key 3">
          <font>
             <Font name="Monospaced Regular" size="12.0" />
          </font></TextField>
@@ -29,22 +29,30 @@
       <Label layoutX="14.0" layoutY="135.0" prefHeight="17.0" prefWidth="136.0" text="Files &amp; Encryption" />
       <Separator layoutX="117.0" layoutY="142.0" prefHeight="0.0" prefWidth="609.0" />
       <Separator layoutX="47.0" layoutY="21.0" prefHeight="3.0" prefWidth="683.0" />
-      <TextField fx:id="txt_plain_path" layoutX="14.0" layoutY="159.0" prefHeight="25.0" prefWidth="528.0" promptText="Plaintext filepath" />
-      <TextField fx:id="txt_cipher_path" layoutX="14.0" layoutY="184.0" prefHeight="25.0" prefWidth="528.0" promptText="Ciphertext filepath" />
+      <TextField fx:id="txt_plain_path" layoutX="14.0" layoutY="159.0" prefHeight="25.0" prefWidth="500.0" promptText="Plaintext filepath">
+         <font>
+            <Font name="Monospaced Regular" size="12.0" />
+         </font></TextField>
+      <TextField fx:id="txt_cipher_path" layoutX="14.0" layoutY="184.0" prefHeight="25.0" prefWidth="500.0" promptText="Ciphertext filepath">
+         <font>
+            <Font name="Monospaced Regular" size="12.0" />
+         </font></TextField>
       <Button fx:id="btn_load_plain" layoutX="543.0" layoutY="159.0" mnemonicParsing="false" onMouseClicked="#onLoadPlainButtonClick" prefHeight="25.0" prefWidth="94.0" text="Load from..." />
       <Button fx:id="btn_save_plain" layoutX="637.0" layoutY="159.0" mnemonicParsing="false" onMouseClicked="#onSavePlainButtonClick" prefHeight="25.0" prefWidth="94.0" text="Save to..." />
       <Button fx:id="btn_load_cipher" layoutX="543.0" layoutY="184.0" mnemonicParsing="false" onMouseClicked="#onLoadCipherButtonClick" prefHeight="25.0" prefWidth="94.0" text="Load from..." />
       <Button fx:id="btn_save_cipher" layoutX="637.0" layoutY="184.0" mnemonicParsing="false" onMouseClicked="#onSaveCipherButtonClick" prefHeight="25.0" prefWidth="94.0" text="Save to..." />
       <TextArea fx:id="txt_area_plaintext" layoutX="17.0" layoutY="250.0" prefHeight="517.0" prefWidth="347.0" promptText="Plaintext">
          <font>
-            <Font name="Comic Sans MS" size="12.0" />
+            <Font name="Monospaced Regular" size="12.0" />
          </font></TextArea>
       <TextArea fx:id="txt_area_ciphertext" layoutX="383.0" layoutY="250.0" prefHeight="517.0" prefWidth="347.0" promptText="Ciphertext">
          <font>
-            <Font name="Matura MT Script Capitals" size="12.0" />
+            <Font name="Monospaced Regular" size="12.0" />
          </font></TextArea>
       <Button fx:id="btn_encrypt" layoutX="288.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#onEncryptButtonClick" text="Encrypt &gt;&gt;" />
       <Button fx:id="btn_decrypt" layoutX="383.0" layoutY="218.0" mnemonicParsing="false" onMouseClicked="#onDecryptButtonClick" text="&lt;&lt; Decrypt" />
       <Label fx:id="txt_label1" layoutX="17.0" layoutY="778.0" prefHeight="17.0" prefWidth="651.0" text="Encrypt your files. Protect your future." />
+      <Separator layoutX="526.0" layoutY="43.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="3.0" />
+      <Separator layoutX="526.0" layoutY="158.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="6.0" />
    </children>
 </Pane>

@@ -2,6 +2,7 @@ package pl.pkr.view;
 
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import pl.pkr.model.DES;
 import pl.pkr.model.Util;
 
 import java.io.*;
@@ -101,10 +102,11 @@ public class CipherController {
     }
 
     public void onEncryptButtonClick() {
-
+            txt_area_ciphertext.setText(DES.encryptString(txt_area_plaintext.getText()));
     }
 
     public void onDecryptButtonClick() {
+            txt_area_plaintext.setText( DES.decryptString(txt_area_ciphertext.getText()) );
 
     }
 
