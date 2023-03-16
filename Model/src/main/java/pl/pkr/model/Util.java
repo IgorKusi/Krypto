@@ -18,6 +18,20 @@ public class Util {
         return sb.toString();
     }
 
+    public static String byte_to_numeric(byte b) {
+        return String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
+    }
+
+    public static String bytes_to_numeric(byte[] bytes) {
+        StringBuilder ret = new StringBuilder();
+
+        for (byte b : bytes) {
+            ret.append(byte_to_numeric(b)).append(" ");
+        }
+
+        return ret.toString().trim();
+    }
+
     public static BigInteger generateKey() {
         return new BigInteger(64, new Random());
     }

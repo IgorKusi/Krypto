@@ -1,6 +1,7 @@
 package pl.pkr.view;
 
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import pl.pkr.model.DES;
 import pl.pkr.model.Util;
@@ -103,13 +104,16 @@ public class CipherController {
 
 
     public void onEncryptButtonClick() {
-            DES des = new DES(DES.TextManipulation.byte_arr_to_bits_64(Static.s_key1.getBytes()));
-            txt_area_ciphertext.setText(des.encryptString(txt_area_plaintext.getText()));
+        DES des = new DES(DES.TextManipulation.byte_arr_to_bits_64(Static.s_key1.getBytes()));
+        Static.last_result = des.encryptString(txt_area_plaintext.getText());
+        txt_area_ciphertext.setText(Static.last_result);
+        System.out.println("Result: " + Static.last_result);
+
     }
 
     public void onDecryptButtonClick() {
-            DES des = new DES(DES.TextManipulation.byte_arr_to_bits_64(Static.s_key1.getBytes()));
-            txt_area_plaintext.setText( des.decryptString(txt_area_ciphertext.getText()) );
+        DES des = new DES(DES.TextManipulation.byte_arr_to_bits_64(Static.s_key1.getBytes()));
+        txt_area_plaintext.setText( des.decryptString(txt_area_ciphertext.getText()) );
     }
 
 

@@ -9,4 +9,6 @@ public class Static {
     public static String s_key2;
     public static BitSet key3;
     public static String s_key3;
+
+    public static String last_result;
 }

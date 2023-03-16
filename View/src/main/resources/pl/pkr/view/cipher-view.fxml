@@ -41,11 +41,11 @@
       <Button fx:id="btn_save_plain" layoutX="637.0" layoutY="159.0" mnemonicParsing="false" onMouseClicked="#onSavePlainButtonClick" prefHeight="25.0" prefWidth="94.0" text="Save to..." />
       <Button fx:id="btn_load_cipher" layoutX="543.0" layoutY="184.0" mnemonicParsing="false" onMouseClicked="#onLoadCipherButtonClick" prefHeight="25.0" prefWidth="94.0" text="Load from..." />
       <Button fx:id="btn_save_cipher" layoutX="637.0" layoutY="184.0" mnemonicParsing="false" onMouseClicked="#onSaveCipherButtonClick" prefHeight="25.0" prefWidth="94.0" text="Save to..." />
-      <TextArea fx:id="txt_area_plaintext" layoutX="17.0" layoutY="250.0" prefHeight="517.0" prefWidth="347.0" promptText="Plaintext">
+      <TextArea fx:id="txt_area_plaintext" layoutX="17.0" layoutY="250.0" prefHeight="517.0" prefWidth="347.0" promptText="Plaintext" wrapText="true">
          <font>
             <Font name="Monospaced Regular" size="12.0" />
          </font></TextArea>
-      <TextArea fx:id="txt_area_ciphertext" layoutX="383.0" layoutY="250.0" prefHeight="517.0" prefWidth="347.0" promptText="Ciphertext">
+      <TextArea fx:id="txt_area_ciphertext" layoutX="383.0" layoutY="250.0" prefHeight="517.0" prefWidth="347.0" promptText="Ciphertext" wrapText="true">
          <font>
             <Font name="Monospaced Regular" size="12.0" />
          </font></TextArea>

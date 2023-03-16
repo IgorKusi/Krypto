@@ -2,11 +2,6 @@ package pl.pkr.model;
 
 import pl.pkr.model.Util.Pair;
 
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetEncoder;
-import java.nio.charset.CoderResult;
 import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
 
@@ -22,7 +17,7 @@ public class DES {
 
     public DES(boolean[] key) {
         this.key = key;
-        this.keyHalves = applyPC1(this.key);
+        this.keyHalves = apply_PC1(this.key);
         this.subkeys = getSubkeys(this.keyHalves);
     }
 
@@ -49,34 +44,53 @@ public class DES {
 //        }
 //
 //        return encr.toString();
-
-
+        //TODO: output is in hex string -> parse input as such
 
         byte[] allBytes = string.getBytes(StandardCharsets.UTF_8);
-        byte[] buffer = new byte[8];
+        byte[] in_buffer = new byte[8];
+        // Dopelnienie do podzielnej przez 8
+        byte[] out_buffer = new byte[allBytes.length + 8 - (allBytes.length % 8)];
+        int out_buffer_i = 0;
         int lastByte = 0;
-        StringBuilder ret = new StringBuilder();
+
+//        StringBuilder ret = new StringBuilder();
+        String ret = "";
 
         for (int i = 0; i < allBytes.length; i++) {
-            buffer[i % 8] = allBytes[i];
+            in_buffer[i % 8] = allBytes[i];
             lastByte = i % 8;
 
             if ((i + 1) % 8 == 0) {
-                boolean[] encrypted = encrypt(byte_arr_to_bits_64(buffer));
-                ret.append(new String(bits_64_to_byte_arr(encrypted)));
-                System.out.println(Util.bits_to_numeric(byte_arr_to_bits_64(buffer)));
-                buffer = new byte[8];
+                boolean[] encrypted = encrypt(byte_arr_to_bits_64(in_buffer));
+                byte[] encrypted_bytes = bits_64_to_byte_arr(encrypted);
+                for (byte b : encrypted_bytes) {
+                    out_buffer[out_buffer_i] = b;
+                    ++out_buffer_i;
+                }
+
+//                ret.append(new String(bits_64_to_byte_arr(encrypted)));
+                System.out.println("Buffer: " + Util.bits_to_numeric(byte_arr_to_bits_64(in_buffer)));
+                System.out.println("E_buffer: " + Util.bits_to_numeric(encrypted));
+                in_buffer = new byte[8];
             }
         }
 
         if (lastByte != 7) {
-            boolean[] encrypted = encrypt(byte_arr_to_bits_64(buffer));
-            ret.append(new String(bits_64_to_byte_arr(encrypted)));
-            System.out.println(Util.bits_to_numeric(byte_arr_to_bits_64(buffer)));
+            boolean[] encrypted = encrypt(byte_arr_to_bits_64(in_buffer));
+            byte[] encrypted_bytes = bits_64_to_byte_arr(encrypted);
+            for (byte b : encrypted_bytes) {
+                out_buffer[out_buffer_i] = b;
+                ++out_buffer_i;
+            }
+//            ret.append(new String(bits_64_to_byte_arr(encrypted)));
+            System.out.println("Buffer: " + Util.bits_to_numeric(byte_arr_to_bits_64(in_buffer)));
+            System.out.println("E_buffer: " + Util.bits_to_numeric(encrypted));
         }
 
-        System.out.println(ret.toString());
-        return ret.toString();
+//        ret = new String(out_buffer);
+        ret = bytes_to_hex(out_buffer);
+        System.out.println(ret);
+        return ret;
     }
 
     public String decryptString(String string) {
@@ -123,7 +137,7 @@ public class DES {
             BitSet bits = BitSet.valueOf(bytes);
 
             for (int i = 0; i < 64; ++i) {
-                ret[i] = bits.get(i);
+                ret[i] = bits.get( 8 * (i / 8) + 7 - (i % 8) );
             }
 
             return ret;
@@ -135,16 +149,35 @@ public class DES {
             byte b = 0b00000000;
             for (int i = 0; i < 64; ++i) {
                 b |= bits[i] ? 0b00000001 : 0;
-                b <<= 1;
 
                 if ((i + 1) % 8 == 0) {
                     ret[i / 8] = b;
                     b = 0b00000000;
-                }
+                } else
+                    b <<= 1;
             }
 
             return ret;
         }
+
+        public static String bytes_to_hex(byte[] bytes) {
+            StringBuilder ret = new StringBuilder();
+            String hex_byte;
+
+            for (byte b : bytes) {
+                int positiveValue = b & 0x000000FF;
+                hex_byte = Integer.toHexString(positiveValue);
+                int hex_byte_len = hex_byte.length();
+
+                while (hex_byte_len++ < 2)
+                    ret.append("0");
+
+                ret.append(hex_byte);
+            }
+
+            return ret.toString();
+        }
+
         public static boolean[] applyIP(boolean[] block_64) {
             boolean[] ret = new boolean[64];
             for (int i = 0; i < 64; ++i)
@@ -236,7 +269,7 @@ public class DES {
                     sb.append(arr[i] ? "1" : "0");
                 }
 
-                return Integer.parseInt(sb.toString(), 2);
+                return Integer.parseUnsignedInt(sb.toString(), 2);
             }
 
             public static boolean[] int_to_bit_4(int input) {
@@ -244,7 +277,7 @@ public class DES {
                 int i = 0;
 
                 while (input >= 1) {
-                    ret[i] = input % 2 == 1;
+                    ret[4 - i - 1] = input % 2 == 1;
                     input /= 2;
 
                     ++i;
@@ -252,7 +285,7 @@ public class DES {
                 return ret;
             }
 
-            public static boolean[] connect_4_to_32(boolean[][] boxes_8x4) {
+            public static boolean[] connect_8x4_to_32(boolean[][] boxes_8x4) {
                 boolean[] ret = new boolean[32];
 
                 for (int i = 0; i < 32; ++i) {
@@ -288,7 +321,7 @@ public class DES {
                     s_out_boxes[i] = int_to_bit_4(s_output);
                 }
 
-                boolean[] linked_s_out = connect_4_to_32(s_out_boxes);
+                boolean[] linked_s_out = connect_8x4_to_32(s_out_boxes);
                 return applyP(linked_s_out);
             }
 
@@ -298,7 +331,7 @@ public class DES {
 
 
     public static class KeyManipulation {
-        public static Pair<boolean[]> applyPC1(boolean[] key_64) {
+        public static Pair<boolean[]> apply_PC1(boolean[] key_64) {
             boolean[] left = new boolean[28],
                       right = new boolean[28];
 
