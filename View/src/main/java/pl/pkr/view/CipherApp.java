@@ -1,4 +1,8 @@
+//TODO parse as binary string lol xdxd xd xd
+
 package pl.pkr.view;
+
+
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
