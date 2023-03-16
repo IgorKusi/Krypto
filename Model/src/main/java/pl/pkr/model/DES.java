@@ -84,6 +84,33 @@ public class DES {
 
 
     public static class TextManipulation {
+        public static boolean[] byte_arr_to_bits_64(byte[] bytes) {
+            boolean[] ret = new boolean[64];
+            BitSet bits = BitSet.valueOf(bytes);
+
+            for (int i = 0; i < 64; ++i) {
+                ret[i] = bits.get(i);
+            }
+
+            return ret;
+        }
+
+        public static byte[] bits_64_to_byte_arr(boolean[] bits) {
+            byte[] ret = new byte[8];
+
+            byte b = 0b00000000;
+            for (int i = 0; i < 64; ++i) {
+                b |= bits[i] ? 0b00000001 : 0;
+                b <<= 1;
+
+                if ((i + 1) % 8 == 0) {
+                    ret[i / 8] = b;
+                    b = 0b00000000;
+                }
+            }
+
+            return ret;
+        }
         public static boolean[] applyIP(boolean[] block_64) {
             boolean[] ret = new boolean[64];
             for (int i = 0; i < 64; ++i)
@@ -231,33 +258,7 @@ public class DES {
                 return applyP(linked_s_out);
             }
 
-            public static boolean[] byte_arr_to_bits_64(byte[] bytes) {
-                boolean[] ret = new boolean[64];
-                BitSet bits = BitSet.valueOf(bytes);
 
-                for (int i = 0; i < 64; ++i) {
-                    ret[i] = bits.get(i);
-                }
-
-                return ret;
-            }
-
-            public static byte[] bits_64_to_byte_arr(boolean[] bits) {
-                byte[] ret = new byte[8];
-
-                byte b = 0b00000000;
-                for (int i = 0; i < 64; ++i) {
-                    b |= bits[i] ? 0b00000001 : 0;
-                    b <<= 1;
-
-                    if ((i + 1) % 8 == 0) {
-                        ret[i / 8] = b;
-                        b = 0b00000000;
-                    }
-                }
-
-                return ret;
-            }
         }
     }
 

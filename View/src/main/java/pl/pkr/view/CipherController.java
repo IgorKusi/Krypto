@@ -101,12 +101,15 @@ public class CipherController {
             txt_cipher_path.setText(saveFile.getAbsolutePath());
     }
 
+
     public void onEncryptButtonClick() {
-            txt_area_ciphertext.setText(DES.encryptString(txt_area_plaintext.getText()));
+            DES des = new DES(DES.TextManipulation.byte_arr_to_bits_64(Static.key1.toByteArray()));
+            txt_area_ciphertext.setText(des.encryptString(txt_area_plaintext.getText()));
     }
 
     public void onDecryptButtonClick() {
-            txt_area_plaintext.setText( DES.decryptString(txt_area_ciphertext.getText()) );
+            DES des = new DES(DES.TextManipulation.byte_arr_to_bits_64(Static.key1.toByteArray()));
+            txt_area_plaintext.setText( des.decryptString(txt_area_ciphertext.getText()) );
 
     }
 
