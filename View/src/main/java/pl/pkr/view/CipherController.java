@@ -8,6 +8,7 @@ import pl.pkr.model.Util;
 
 import java.io.*;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
 
 public class CipherController {
@@ -113,7 +114,19 @@ public class CipherController {
 
     public void onDecryptButtonClick() {
         DES des = new DES(DES.TextManipulation.byte_arr_to_bits_64(Static.s_key1.getBytes()));
-        txt_area_plaintext.setText( des.decryptString(txt_area_ciphertext.getText()) );
+        String ret = des.decryptString(txt_area_ciphertext.getText());
+        boolean[] ignored = Util.string_to_bits(ret);
+        byte[] ignored2 = Util.bits_to_bytes(ignored);
+
+        char[] chars = new char[8];
+        for (int i = 0; i < 8; i++) {
+            chars[i] = (char) ignored2[i];
+        }
+        String char_string = new String(chars);
+
+        String ignored3 = new String(ignored2, StandardCharsets.UTF_8);
+        ret = new String(Util.bits_to_bytes(Util.string_to_bits(ret)), StandardCharsets.UTF_8);
+        txt_area_plaintext.setText( ret );
     }
 
 

@@ -4,6 +4,7 @@ import pl.pkr.model.Util.Pair;
 
 import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
+import java.util.InputMismatchException;
 
 import static pl.pkr.model.DES.KeyManipulation.*;
 import static pl.pkr.model.DES.TextManipulation.*;
@@ -47,9 +48,43 @@ public class DES {
         //TODO: output is in hex string -> parse input as such
 
         byte[] allBytes = string.getBytes(StandardCharsets.UTF_8);
+        try {
+            boolean[] bits = Util.string_to_bits(string);
+            boolean[] bit_buffer = new boolean[64];
+            byte[] byte_buffer = new byte[
+                    bits.length % 8 == 0
+                            ? bits.length / 8
+                            : (bits.length / 8) + 8 - (bits.length % 8)];
+            int byte_buffer_i = 0;
+            for (int i = 0; i < bits.length; i++) {
+                bit_buffer[i % 64] = bits[i];
+
+                //every 64 passed bits parse to byte array and put into byte_buffer
+                //or
+                //on the last round, parse the collected bits to byte_buffer, no need to fill as bool array is by default filled with false
+                if ((i + 1) % 64 == 0 || i == bits.length - 1) {
+                    byte[] round_bytes = bits_64_to_byte_arr(bit_buffer);
+                    for (byte b : round_bytes ) {
+                        byte_buffer[byte_buffer_i] = b;
+                        ++byte_buffer_i;
+                    }
+
+                    bit_buffer = new boolean[64];
+                }
+            }
+
+            allBytes = byte_buffer;
+        } catch (InputMismatchException ignored) {
+            //if caught, the string isn't a bit string, which is also a valid input (can be char string)
+        }
+
+
         byte[] in_buffer = new byte[8];
         // Dopelnienie do podzielnej przez 8
-        byte[] out_buffer = new byte[allBytes.length + 8 - (allBytes.length % 8)];
+        byte[] out_buffer = new byte[
+                allBytes.length % 8 == 0
+                ? allBytes.length
+                : allBytes.length + 8 - (allBytes.length % 8)];
         int out_buffer_i = 0;
         int lastByte = 0;
 
@@ -88,7 +123,7 @@ public class DES {
         }
 
 //        ret = new String(out_buffer);
-        ret = bytes_to_hex(out_buffer);
+        ret = Util.bytes_to_numeric(out_buffer);
         System.out.println(ret);
         return ret;
     }

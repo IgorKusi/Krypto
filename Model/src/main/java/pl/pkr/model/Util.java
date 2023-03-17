@@ -2,6 +2,7 @@ package pl.pkr.model;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Random;
 
@@ -30,6 +31,61 @@ public class Util {
         }
 
         return ret.toString().trim();
+    }
+
+    public static boolean is_bit_string(String string) {
+        for (int i = 0; i < string.length(); ++i) {
+            char c = string.charAt(i);
+            if (c != '0' && c != '1' && c != ' ') return false;
+        }
+
+        return true;
+    }
+
+    public static boolean[] string_to_bits(String bit_string) {
+        if (!is_bit_string(bit_string)) throw new InputMismatchException("Must be a valid bit string");
+        bit_string = bit_string.trim();
+        String[] bytes = bit_string.split(" ");
+        boolean[] ret = new boolean[bytes.length * 8];
+        int i = 0;
+
+        for (String b : bytes) {
+            for (int j = 0; j < 8; j++) {
+                ret[i] = b.charAt(j) == '1';
+                ++i;
+            }
+        }
+
+        return ret;
+    }
+
+    public static byte[] bits_to_bytes(boolean[] bit_array) {
+        return bits_to_bytes(bit_array, false);
+    }
+
+    /**
+     * Will only fill the out array correctly if the in array's length is divisible by 8
+     */
+    public static byte[] bits_to_bytes(boolean[] bit_array, boolean fill_to_8) {
+        byte[] out_buffer = new byte[
+                fill_to_8
+                    ? bit_array.length % 8 == 0
+                        ? bit_array.length / 8
+                        : (bit_array.length / 8) + 8 - (bit_array.length % 8)
+                    : bit_array.length / 8
+                ];
+
+        byte b = 0;
+        for (int i = 0; i < bit_array.length; i++) {
+            b |= bit_array[i] ? 0b00000001 : 0;
+
+            if ((i + 1) % 8 == 0) {
+                out_buffer[i / 8] = b;
+                b = 0;
+            } else b <<= 1;
+        }
+
+        return out_buffer;
     }
 
     public static BigInteger generateKey() {
