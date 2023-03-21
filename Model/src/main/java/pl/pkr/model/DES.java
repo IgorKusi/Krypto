@@ -23,29 +23,7 @@ public class DES {
     }
 
     public String encryptString(String string) {
-//        Charset cs = StandardCharsets.UTF_8;
-//        CharsetEncoder ce = cs.newEncoder();
-//        ByteBuffer out = ByteBuffer.allocate(8);
-//        CharBuffer in = CharBuffer.wrap(string);
-//        StringBuilder encr = new StringBuilder();
-//
-//        while (true) {
-//            CoderResult cr = ce.encode(in, out, true);
-//            byte[] bufContent = new byte[8];
-////            out.
-////            out.get(bufContent);
-//            encr.append(new String(
-//                    bits_64_to_byte_arr(encrypt(
-//                            byte_arr_to_bits_64(out.array())
-//                    ))
-//            ));
-//            out.clear();
-//            if ( !cr.isOverflow() )
-//                break;
-//        }
-//
-//        return encr.toString();
-        //TODO: output is in hex string -> parse input as such
+        //TODO: remove filled bits
 
         byte[] allBytes = string.getBytes(StandardCharsets.UTF_8);
         try {

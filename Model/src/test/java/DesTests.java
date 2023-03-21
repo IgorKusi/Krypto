@@ -394,8 +394,31 @@ public class DesTests {
         }
     }
 
+    @Test
+    public void writeIntToBitsTest() {
+        boolean[] five = new boolean[] {
+                false, false, false, false, false, true, false, true
+        };
+
+        boolean[] bits = Util.writeIntToBits(5);
+
+        for (int i = 0; i < 8; i++) {
+            Assertions.assertEquals(five[i], bits[i]);
+        }
+    }
 
 
+
+
+    @Test
+    public void readIntFromBitsTest(){
+        boolean[] bits = new boolean[] {false, false, false, false, false, false, false, true};
+        int value = Util.readIntFromBits(bits);
+        Assertions.assertEquals(1, value);
+        bits = new boolean[] {false, false, false, true, false, true, true, false};
+        value = Util.readIntFromBits(bits);
+        Assertions.assertEquals(22, value);
+    }
     //@Test
    // public void applyPC2_test(){
        // boolean[] right = new boolean[] {true, false};
