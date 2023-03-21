@@ -1,16 +1,41 @@
 package pl.pkr.model;
 
-import pl.pkr.model.Util.Pair;
+//1 - strip key from 64b to 56b
+//2 - push 64b to IP -> split to 2 halves
+//3 - both halves - 16rounds
+//4 - FP
 
-import java.nio.charset.StandardCharsets;
-import java.util.BitSet;
-import java.util.InputMismatchException;
+public class DES {
 
-import static pl.pkr.model.DES.KeyManipulation.*;
-import static pl.pkr.model.DES.TextManipulation.*;
-import static pl.pkr.model.DES.TextManipulation.Feistel.*;
+}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 public class DES {
     boolean[] key;
     Pair<boolean[]> keyHalves;
@@ -417,5 +442,5 @@ public class DES {
         }
     }
 
+*/
 
-}

@@ -1,3 +1,4 @@
+/*
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pl.pkr.model.DES;
@@ -429,3 +430,4 @@ public class DesTests {
 
 
 
+*/

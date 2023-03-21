@@ -105,28 +105,12 @@ public class CipherController {
 
 
     public void onEncryptButtonClick() {
-        DES des = new DES(DES.TextManipulation.byte_arr_to_bits_64(Static.s_key1.getBytes()));
-        Static.last_result = des.encryptString(txt_area_plaintext.getText());
-        txt_area_ciphertext.setText(Static.last_result);
-        System.out.println("Result: " + Static.last_result);
+
 
     }
 
     public void onDecryptButtonClick() {
-        DES des = new DES(DES.TextManipulation.byte_arr_to_bits_64(Static.s_key1.getBytes()));
-        String ret = des.decryptString(txt_area_ciphertext.getText());
-        boolean[] ignored = Util.string_to_bits(ret);
-        byte[] ignored2 = Util.bits_to_bytes(ignored);
 
-        char[] chars = new char[8];
-        for (int i = 0; i < 8; i++) {
-            chars[i] = (char) ignored2[i];
-        }
-        String char_string = new String(chars);
-
-        String ignored3 = new String(ignored2, StandardCharsets.UTF_8);
-        ret = new String(Util.bits_to_bytes(Util.string_to_bits(ret)), StandardCharsets.UTF_8);
-        txt_area_plaintext.setText( ret );
     }
 
 
