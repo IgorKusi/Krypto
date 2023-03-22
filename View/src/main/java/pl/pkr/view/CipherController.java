@@ -105,11 +105,17 @@ public class CipherController {
 
 
     public void onEncryptButtonClick() {
+            // Static.key1 = txt_key1.getText();
+            // Static.key2 = txt_key2.getText();
+            // Static.key3 = txt_key3.getText();
 
 
     }
 
     public void onDecryptButtonClick() {
+        // Static.key1 = txt_key1.getText();
+        // Static.key2 = txt_key2.getText();
+        // Static.key3 = txt_key3.getText();
 
     }
 

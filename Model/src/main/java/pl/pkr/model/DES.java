@@ -1,4 +1,5 @@
 package pl.pkr.model;
+import pl.pkr.model.Util.*;
 
 //1 - strip key from 64b to 56b
 //2 - push 64b to IP -> split to 2 halves
@@ -6,6 +7,33 @@ package pl.pkr.model;
 //4 - FP
 
 public class DES {
+
+    boolean[] key;
+    Pair<boolean[]> keyHalves;
+    boolean[][] subkeys;
+
+    public DES(boolean[] key) {
+        this.key = key;
+        this.keyHalves = apply_PC1(this.key);
+        this.subkeys = getSubkeys(this.keyHalves);
+    }
+
+
+    public static class TextManipulation{
+
+    }
+
+    public static class KeyManipulation{
+        public Pair<boolean[]> apply_PC1(boolean[] key){
+            Pair<boolean[]> halves = new Pair<>();
+
+        }
+
+    }
+
+    public static class Feistel{
+
+    }
 
 }
 
