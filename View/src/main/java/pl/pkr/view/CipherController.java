@@ -23,13 +23,13 @@ public class CipherController {
 
         public void onGenKeysButtonClick() {
         BigInteger b = Util.generateKey();
-        Static.key1 = BitSet.valueOf(b.toByteArray());
+        Static.key1 = Util.key_string_to_bits(b.toString(2));
         Static.s_key1 = b.toString(16).toUpperCase();
         b = Util.generateKey();
-        Static.key2 = BitSet.valueOf(b.toByteArray());
+        Static.key2 = Util.key_string_to_bits(b.toString(2));
         Static.s_key2 = b.toString(16).toUpperCase();
         b = Util.generateKey();
-        Static.key3 = BitSet.valueOf(b.toByteArray());
+        Static.key3 = Util.key_string_to_bits(b.toString(2));
         Static.s_key3 = b.toString(16).toUpperCase();
 
         txt_key1.setText(Static.s_key1);
@@ -42,14 +42,16 @@ public class CipherController {
         if (saveFile == null) return;
 
         try (BufferedReader br = new BufferedReader(new FileReader(saveFile))) {
-            BigInteger b = new BigInteger(br.readLine(), 16);
-            Static.key1 = BitSet.valueOf(b.toByteArray());
+            BigInteger b = new BigInteger(br.readLine().toUpperCase().trim(), 16);
+            Static.key1 = Util.key_string_to_bits(b.toString(2));
             Static.s_key1 = b.toString(16).toUpperCase();
-            b = new BigInteger(br.readLine(), 16);
-            Static.key2 = BitSet.valueOf(b.toByteArray());
+
+            b = new BigInteger(br.readLine().toUpperCase().trim(), 16);
+            Static.key2 = Util.key_string_to_bits(b.toString(2));
             Static.s_key2 = b.toString(16).toUpperCase();
-            b = new BigInteger(br.readLine(), 16);
-            Static.key3 = BitSet.valueOf(b.toByteArray());
+
+            b = new BigInteger(br.readLine().toUpperCase().trim(), 16);
+            Static.key3 = Util.key_string_to_bits(b.toString(2));
             Static.s_key3 = b.toString(16).toUpperCase();
 
             txt_key1.setText(Static.s_key1);
@@ -105,18 +107,15 @@ public class CipherController {
 
 
     public void onEncryptButtonClick() {
-            // Static.key1 = txt_key1.getText();
-            // Static.key2 = txt_key2.getText();
-            // Static.key3 = txt_key3.getText();
-
-
+            DES des = new DES(Static.key1);
+            String ciphertext = des.encrypt_string(txt_area_plaintext.getText());
+            txt_area_ciphertext.setText(ciphertext);
     }
 
     public void onDecryptButtonClick() {
-        // Static.key1 = txt_key1.getText();
-        // Static.key2 = txt_key2.getText();
-        // Static.key3 = txt_key3.getText();
-
+            DES des = new DES(Static.key1);
+            String plaintext = des.decrypt_string(txt_area_ciphertext.getText());
+            txt_area_plaintext.setText(plaintext);
     }
 
 

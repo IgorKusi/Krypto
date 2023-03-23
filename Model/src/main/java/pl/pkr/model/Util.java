@@ -1,6 +1,7 @@
 package pl.pkr.model;
 
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -12,10 +13,16 @@ public class Util {
     }
 
     public record Pair<T>(T left, T right) {
-        T outer() { return left; }
-        T inner() { return right; }
-
+        public static <T> Pair<T> fromSPair(SPair<T> sPair) {
+            return new Pair<>(
+                    sPair.outer,
+                    sPair.inner
+            );
+        }
     }
+
+    public record SPair<T>(T outer, T inner) {}
+
     public static final int[] IP =
                     {58, 50, 42, 34, 26, 18, 10, 2,
                     60, 52, 44, 36, 28, 20, 12, 4,
@@ -129,8 +136,161 @@ public class Util {
                 { 7, 11, 4, 1, 9, 12, 14, 2, 0, 6, 10, 13, 15, 3, 5, 8 },
                 { 2, 1, 14, 7, 4, 10, 8, 13, 15, 12, 9, 0, 3, 5, 6, 11 }
             }
-
-
     };
+
+    public static boolean[] connect_halves(Pair<boolean[]> halves, int half_size) {
+        boolean[] ret = new boolean[half_size * 2];
+
+        for (int i = 0; i < half_size; i++) {
+            ret[i] = halves.left()[i];
+            ret[half_size + i] = halves.right()[i];
+        }
+
+        return ret;
+    }
+
+    public static Pair<boolean[]> split_in_half(boolean[] bit_block, int block_size) {
+        boolean[] left = new boolean[block_size / 2];
+        boolean[] right = new boolean[block_size / 2];
+
+        for (int i = 0; i < block_size / 2; i++) {
+            left[i] = bit_block[i];
+            right[i] = bit_block[(block_size / 2) + i];
+        }
+
+        return new Pair<>(left, right);
+    }
+
+    public static String bits_to_numeric(boolean[] bits) {
+        StringBuilder sb = new StringBuilder(bits.length);
+
+        for (int i = 0; i < bits.length; i++) {
+            sb.append(bits[i] ? "1" : "0");
+            if ((i + 1) % 8 == 0) sb.append(" ");
+        }
+
+        return sb.toString();
+    }
+
+    public static boolean[] xor(boolean[] block_left, boolean[] block_right, int block_size) {
+        boolean[] ret = new boolean[block_size];
+
+        for (int i = 0; i < block_size; i++) {
+            ret[i] = block_left[i] ^ block_right[i];
+        }
+
+        return ret;
+    }
+
+    public static int bits_to_int(boolean[] bit_block, int block_size) {
+        int ret = 0;
+
+        for (int i = 0; i < block_size; i++) {
+            ret = ret | (bit_block[i] ? 1 : 0);
+            if (i != block_size - 1) ret = ret << 1;
+        }
+
+        return ret;
+    }
+
+    public static byte bits_8_to_byte(boolean[] bits) {
+        byte ret = 0;
+
+        for (int i = 0; i < 8; i++) {
+            ret |= (bits[i] ? 1 : 0);
+            if (i != 7) ret <<= 1;
+        }
+
+        return ret;
+    }
+
+    public static boolean[] int_to_bits_4(int value) {
+        boolean[] ret = new boolean[4];
+        int i = 3;
+
+        while (value > 0) {
+            ret[i] = value % 2 == 1;
+            value /= 2;
+            --i;
+        }
+
+        return ret;
+    }
+
+    public static boolean[] byte_to_bits(byte b) {
+        boolean[] bits = new boolean[8];
+        int i = 7;
+
+        while (b > 0) {
+            bits[i] = b % 2 == 1;
+            b >>= 1;
+            --i;
+        }
+
+        return bits;
+    }
+
+    public static boolean[][] string_to_bits(String string) {
+        byte[] bytes = string.getBytes(StandardCharsets.UTF_8);
+
+        int nRows = bytes.length / 8 + 1;
+        int emptyBytes = nRows - bytes.length;
+
+        boolean[][] matrix = new boolean[nRows][64];
+
+        for (int row = 0; row < nRows; row++) {
+
+            //row -> 8x8 bits
+            for (int byte_in_row = 0; byte_in_row < 8; byte_in_row++) {
+                boolean[] byte_bits =
+                        8 * row + byte_in_row >= bytes.length
+                                ? new boolean[8]
+                                : byte_to_bits(bytes[row * 8 + byte_in_row]);
+
+                for (int bit_in_byte = 0; bit_in_byte < 8; bit_in_byte++) {
+                    matrix[row][8 * byte_in_row + bit_in_byte] = byte_bits[bit_in_byte];
+                }
+            }
+        }
+
+        boolean[] filled_bytes = new boolean[8];
+        boolean[] temp = int_to_bits_4(emptyBytes);
+        for (int i = 0; i < 4; i++) {
+            filled_bytes[4 + i] = temp[i];
+        }
+
+        for (int offset_bit = 0; offset_bit < 8; offset_bit++) {
+            matrix[nRows - 1][7 * 8 + offset_bit] = filled_bytes[offset_bit];
+        }
+
+        return matrix;
+    }
+
+    public static boolean[][] numeric_to_bits(String string) {
+
+        String[] bytes = string.split(" ");
+        boolean[][] matrix = new boolean[bytes.length / 8][64];
+
+        for (int row = 0; row < bytes.length / 8; row++) {
+            for (int byte_in_row = 0; byte_in_row < 8; byte_in_row++) {
+                for (int bit_in_byte = 0; bit_in_byte < 8; bit_in_byte++) {
+                    matrix[row][8 * byte_in_row + bit_in_byte]
+                            = bytes[8 * row + byte_in_row].charAt(bit_in_byte) == '1';
+                }
+            }
+        }
+
+        return matrix;
+    }
+
+    public static boolean[] key_string_to_bits(String key_64) {
+        boolean[] bits = new boolean[64];
+
+        for (int i = 0; i < key_64.length(); i++) {
+            bits[64 - key_64.length() + i] = key_64.charAt(i) == '1';
+        }
+
+        return bits;
+    }
 
 }

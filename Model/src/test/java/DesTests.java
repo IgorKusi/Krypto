@@ -1,3 +1,109 @@
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import pl.pkr.model.DES;
+import pl.pkr.model.Util;
+
+import java.io.PrintStream;
+import java.util.Random;
+
+public class DesTests {
+    static class DesTestFixture {
+        public static boolean[] arr_32 = new boolean[]{
+                true, true, true, true, false, false, false, false,
+                true, false, true, false, false, true, false, true,
+                false, false, false, false, true, true, true, true,
+                false, true, false, true
+        };
+
+        public static boolean[] arr_32_rotated = new boolean[]{
+                true, true, true, false, false, false, false, true,
+                false, true, false, false, true, false, true, false,
+                false, false, false, true, true, true, true, false,
+                true, false, true, true
+        };
+
+        public static boolean[] arr_56 = new boolean[]{
+                true, true, true, true, false, false, false, false,
+                true, false, true, false, false, true, false, true,
+                false, false, false, false, true, true, true, true,
+                false, true, false, true,
+                true, true, true, false, false, false, false, true,
+                false, true, false, false, true, false, true, false,
+                false, false, false, true, true, true, true, false,
+                true, false, true, true
+        };
+
+        public static boolean[] rand_bools_128 = {
+                false, true, false, true, true, false, true, true,
+                false, false, false, true, true, false, true, false,
+                true, true, true, false, false, true, false, true,
+                true, false, true, false, false, true, false, true,
+                true, false, true, false, false, true, true, false,
+                true, true, false, false, true, false, true, true,
+                true, false, true, false, false, true, true, false,
+                false, true, false, true, true, false, true, false,
+                false, true, false, true, true, false, true, false,
+                false, true, true, false, true, true, false, false,
+                true, false, true, true, false, true, false, false,
+                true, false, true, true, false, true, false, false,
+                true, false, true, true, false, true, true, true,
+                false, false, true, true, false, true, false, false,
+                true, false, true, true, false, true, false, false,
+                true, false, true, true, false, true, true, false,
+                true, true, false, false, true, false, true, true
+        };
+
+        public static boolean[] get_bits(int bit_num) {
+            return get_bits(bit_num, 0);
+        }
+
+        public static boolean[] get_bits(int bit_num, int start_index) {
+            boolean[] ret = new boolean[bit_num];
+
+            while (start_index > 128) start_index %= 128;
+            for (int i = 0; i < bit_num; ++i) {
+                ret[i] = rand_bools_128[(i + start_index) % 128];
+            }
+
+            return ret;
+        }
+
+        public static boolean[] get_rand_bits(int bit_num) {
+            boolean[] ret = new boolean[bit_num];
+
+            Random r = new Random();
+            for (int i = 0; i < bit_num; i++) {
+                ret[i] = r.nextBoolean();
+            }
+
+            return ret;
+        }
+
+        public static String byte_to_numeric(byte b) {
+            return String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
+        }
+    }
+
+    @Test
+    public void PC1_test(){
+        boolean[] key_64 = DesTestFixture.get_bits(64);
+        Util.Pair<boolean[]> ret = DES.KeyManipulation.apply_PC1(key_64);
+        Assertions.assertEquals(28, ret.left().length);
+        Assertions.assertEquals(28, ret.right().length);
+
+        System.out.println( Util.bits_to_numeric(key_64));
+        System.out.println(Util.bits_to_numeric(ret.left()));
+        System.out.print(Util.bits_to_numeric(ret.right()));
+
+
+    }
+
+
+
+}
+
+
+
 /*
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -85,7 +191,8 @@ public class DesTests {
             return String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0');
         }
 
-    }
+
+
 
 
 
