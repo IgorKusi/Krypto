@@ -55,6 +55,7 @@ public class DES {
                 }
 
                 bytes[bytes_i] = Util.bits_8_to_byte(bit_buffer);
+                bytes_i++;
             }
         }
 

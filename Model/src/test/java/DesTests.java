@@ -95,7 +95,87 @@ public class DesTests {
         System.out.println(Util.bits_to_numeric(ret.left()));
         System.out.print(Util.bits_to_numeric(ret.right()));
 
+    }
 
+    @Test
+    public void key_string_to_bits_test() {
+        boolean[] key = DesTestFixture.get_bits(64);
+        StringBuilder sb = new StringBuilder(64);
+
+        for (boolean bit : key) {
+            if (bit) sb.append("1");
+            else sb.append("0");
+        }
+
+        boolean[] ret = Util.key_string_to_bits(sb.toString());
+
+        for (int i = 0; i < 64; i++) {
+            Assertions.assertEquals(key[i], ret[i]);
+        }
+    }
+
+
+    @Test
+    public void numeric_to_bits_test(){
+        String testString = "10001000 00000001 10101010";
+        boolean[][] testmatrix =
+                {{true,false,false,false, true,false,false,false},
+                        {false,false,false,false,false,false,false,true},
+                        {true,false,true,false,true,false,true,false}};
+
+        boolean[][] xdd = Util.numeric_to_bits(testString);
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 8; j++) {
+                Assertions.assertEquals(testmatrix[i][j],xdd[i][j]);}
+        }
+    }
+
+    @Test
+    public void int_to_bits_4test(){
+        int testvalue = 0;
+        boolean[] testret = {false,false,false,false};
+    }
+
+    @Test
+    public void string_to_bits_test() {
+        boolean[][] ala = new boolean[][] {
+                {
+                    false, true, false, false, false, false, false, true,
+                    false, true, true, false, true, true, false, false,
+                    false, true, true, false, false, false, false, true,
+                    false, false, false, false, false, false, false, false,
+                    false, false, false, false, false, false, false, false,
+                    false, false, false, false, false, false, false, false,
+                    false, false, false, false, false, false, false, false,
+                    false, false, false, false, false, false, false, false
+                }
+        };
+
+        boolean[][] ret = Util.string_to_bits("Ala");
+
+        System.out.println(Util.bits_to_numeric(ala[0]));
+        System.out.println(Util.bits_to_numeric(ret[0]));
+
+        for (int i = 0; i < 64; i++) {
+            Assertions.assertEquals(ala[0][i], ret[0][i]);
+        }
+
+    }
+
+    @Test
+    public void byte_to_bits_test() {
+        boolean[] bits = new boolean[] {
+                true, true, false, true, false, true, false, true
+        };
+
+        boolean[] ret = Util.byte_to_bits((byte) 0b11010101);
+
+        System.out.println(Util.bits_to_numeric(bits));
+        System.out.println(Util.bits_to_numeric(ret));
+
+        for (int i = 0; i < 8; i++) {
+            Assertions.assertEquals(bits[i], ret[i]);
+        }
     }
 
 

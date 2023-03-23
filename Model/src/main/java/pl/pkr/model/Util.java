@@ -2,10 +2,7 @@ package pl.pkr.model;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Util {
     public static BigInteger generateKey() {
@@ -206,12 +203,12 @@ public class Util {
 
     public static boolean[] int_to_bits_4(int value) {
         boolean[] ret = new boolean[4];
-        int i = 3;
+        int i = 0;
 
         while (value > 0) {
             ret[i] = value % 2 == 1;
             value /= 2;
-            --i;
+            ++i;
         }
 
         return ret;
@@ -221,7 +218,8 @@ public class Util {
         boolean[] bits = new boolean[8];
         int i = 7;
 
-        while (b > 0) {
+        while (Math.abs(b) > 0) {
+            //TODO modulo ujemne i -1/2 = -1
             bits[i] = b % 2 == 1;
             b >>= 1;
             --i;
