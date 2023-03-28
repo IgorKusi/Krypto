@@ -23,13 +23,13 @@ public class CipherController {
 
         public void onGenKeysButtonClick() {
         BigInteger b = Util.generateKey();
-        Static.key1 = Util.key_string_to_bits(b.toString(2));
+        Static.key1 = b.toByteArray();
         Static.s_key1 = b.toString(16).toUpperCase();
         b = Util.generateKey();
-        Static.key2 = Util.key_string_to_bits(b.toString(2));
+        Static.key2 = b.toByteArray();
         Static.s_key2 = b.toString(16).toUpperCase();
         b = Util.generateKey();
-        Static.key3 = Util.key_string_to_bits(b.toString(2));
+        Static.key3 = b.toByteArray();
         Static.s_key3 = b.toString(16).toUpperCase();
 
         txt_key1.setText(Static.s_key1);
@@ -43,15 +43,15 @@ public class CipherController {
 
         try (BufferedReader br = new BufferedReader(new FileReader(saveFile))) {
             BigInteger b = new BigInteger(br.readLine().toUpperCase().trim(), 16);
-            Static.key1 = Util.key_string_to_bits(b.toString(2));
+            Static.key1 = b.toByteArray();
             Static.s_key1 = b.toString(16).toUpperCase();
 
             b = new BigInteger(br.readLine().toUpperCase().trim(), 16);
-            Static.key2 = Util.key_string_to_bits(b.toString(2));
+            Static.key2 = b.toByteArray();
             Static.s_key2 = b.toString(16).toUpperCase();
 
             b = new BigInteger(br.readLine().toUpperCase().trim(), 16);
-            Static.key3 = Util.key_string_to_bits(b.toString(2));
+            Static.key3 = b.toByteArray();
             Static.s_key3 = b.toString(16).toUpperCase();
 
             txt_key1.setText(Static.s_key1);
