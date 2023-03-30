@@ -29,15 +29,51 @@ public class DES {
             System.arraycopy(out_buffer, 0, encrypted, i, 8);
         }
 
-        return new BigInteger(encrypted).toString(16);
+        StringBuilder ret = new StringBuilder();
+        for (byte b : encrypted) {
+            ret.append(String.format("%02x", b));
+        }
+
+        return ret.toString().toUpperCase();
     }
 
     public String decrypt_string(String string) {
-        this.subkeys = reverse_subkeys(this.subkeys);
-        BigInteger temp = new BigInteger(string, 16);
-        String ret = encrypt_string(new String(temp.toByteArray(), StandardCharsets.UTF_8));
-        this.subkeys = reverse_subkeys(this.subkeys);
-        return new String(new BigInteger(ret).toByteArray(), StandardCharsets.UTF_8);
+
+        byte[] in_bytes = new byte[string.length() / 2];
+
+        for (int i = 0; i < string.length(); i+=2) {
+            byte b = 0;
+            b |= Util.HEX_STRING.indexOf(string.charAt(i));
+            b <<= 4;
+            b |= Util.HEX_STRING.indexOf(string.charAt(i + 1));
+
+            in_bytes[i / 2] = b;
+        }
+
+        byte[][] byte_matrix = new byte[in_bytes.length / 8][8];
+        for (int row = 0; row < in_bytes.length / 8; row++) {
+            for (int byte_in_row = 0; byte_in_row < 8; byte_in_row++) {
+                byte_matrix[row][byte_in_row] = in_bytes[8 * row + byte_in_row];
+            }
+        }
+
+        byte[][] decrypted_matrix = new byte[in_bytes.length / 8][8];
+        byte[][] subkeys = reverse_subkeys(this.subkeys);
+
+
+        for (int i = 0; i < byte_matrix.length; i++) {
+            decrypted_matrix[i] = encrypt_block(byte_matrix[i], subkeys);
+        }
+
+        StringBuilder ret = new StringBuilder(decrypted_matrix.length * 8);
+
+        for (int row = 0; row < decrypted_matrix.length; row++) {
+            for (int byte_in_row = 0; byte_in_row < 8; byte_in_row++) {
+                ret.append((char) decrypted_matrix[row][byte_in_row]);
+            }
+        }
+
+        return ret.toString();
     }
 
     public static byte[] encrypt_block(byte[] block_8, byte[][] subkeys_6) {
@@ -209,7 +245,7 @@ public class DES {
         }
         return ret;
     }
-    
-    
+
+
     
 }

@@ -64,6 +64,23 @@ public class DesTests {
 
     }
 
+    @Test
+    public void bytes_to_hex_test() {
+        byte[] bytes = new byte[]{
+                5, 10, 120, 100, 34
+        };
+
+        System.out.println(Util.byte_to_hex(bytes[0]));
+        System.out.println(Util.byte_to_hex(bytes[1]));
+        System.out.println(Util.byte_to_hex(bytes[2]));
+        System.out.println(Util.byte_to_hex(bytes[3]));
+        System.out.println(Util.byte_to_hex(bytes[4]));
+
+        System.out.println(Util.bytes_to_hex(bytes));
+
+
+    }
+
 
 
 }

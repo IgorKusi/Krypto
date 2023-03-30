@@ -20,6 +20,8 @@ public class Util {
 
     public record SPair<T>(T outer, T inner) {}
 
+    public static final String HEX_STRING = "0123456789ABCDEF";
+
     public static final int[] IP =
                     {58, 50, 42, 34, 26, 18, 10, 2,
                     60, 52, 44, 36, 28, 20, 12, 4,
@@ -150,6 +152,23 @@ public class Util {
         }
 
         return sb.toString().trim();
+    }
+
+    public static String byte_to_hex(byte b) {
+        String ret = "";
+        ret += HEX_STRING.charAt((b >> 4) & 0b00001111);
+        ret += HEX_STRING.charAt(b & 0b00001111);
+
+        return ret;
+    }
+
+    public static String bytes_to_hex(byte[] bytes) {
+        StringBuilder sb = new StringBuilder(bytes.length * 2);
+
+        for (byte b : bytes)
+            sb.append(byte_to_hex(b));
+
+        return sb.toString();
     }
 
 }
