@@ -1,5 +1,6 @@
 package pl.pkr.view;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -9,6 +10,7 @@ import pl.pkr.model.Util;
 import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.BitSet;
 
 public class CipherController {
@@ -119,4 +121,24 @@ public class CipherController {
     }
 
 
+    public void onEncryptFileButtonClick(ActionEvent actionEvent) throws IOException {
+        DES des = new DES(Static.key1);
+        File loadFile = ViewUtil.getFileChooser("Select file to load.").showOpenDialog(new Stage());
+        String plaintext = ViewUtil.readFile(loadFile);
+        txt_area_plaintext.setText(plaintext);
+        byte[] bytes = Files.readAllBytes(loadFile.toPath());
+        String ciphertext = des.encrypt_bytes(bytes);
+        txt_area_ciphertext.setText(ciphertext);
+        ViewUtil.saveFile(ciphertext);
+    }
+
+    public void onDecryptFileButtonClick(ActionEvent actionEvent) {
+        DES des = new DES(Static.key1);
+        File loadFile = ViewUtil.getFileChooser("Select file to load.").showOpenDialog(new Stage());
+        String ciphertext = ViewUtil.readFile(loadFile);
+        txt_area_ciphertext.setText(ciphertext);
+        byte[] plaintext = des.decrypt_to_bytes(ciphertext);
+        txt_area_plaintext.setText(new String(plaintext));
+        ViewUtil.saveFile(plaintext);
+    }
 }

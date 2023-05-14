@@ -37,6 +37,69 @@ public class DES {
         return ret.toString().toUpperCase();
     }
 
+    public String encrypt_bytes(byte[] bytes) {
+       byte[][] byte_matrix = new byte[bytes.length / 8][8];
+        for (int row = 0; row < bytes.length / 8; row++) {
+            for (int byte_in_row = 0; byte_in_row < 8; byte_in_row++) {
+                byte_matrix[row][byte_in_row] = bytes[8 * row + byte_in_row];
+            }
+        }
+
+        byte[][] encrypted_matrix = new byte[bytes.length / 8][8];
+        byte[][] subkeys = this.subkeys;
+
+        for (int i = 0; i < byte_matrix.length; i++) {
+            encrypted_matrix[i] = encrypt_block(byte_matrix[i], subkeys);
+        }
+
+        StringBuilder ret = new StringBuilder(encrypted_matrix.length * 8);
+
+        for (int row = 0; row < encrypted_matrix.length; row++) {
+            for (int byte_in_row = 0; byte_in_row < 8; byte_in_row++) {
+                ret.append((char) encrypted_matrix[row][byte_in_row]);
+            }
+        }
+
+        return ret.toString();
+    }
+
+    public byte[] decrypt_to_bytes(String string) {
+        byte[] in_bytes = new byte[string.length() / 2];
+
+        for (int i = 0; i < string.length(); i+=2) {
+            byte b = 0;
+            b |= Util.HEX_STRING.indexOf(string.charAt(i));
+            b <<= 4;
+            b |= Util.HEX_STRING.indexOf(string.charAt(i + 1));
+
+            in_bytes[i / 2] = b;
+        }
+
+        byte[][] byte_matrix = new byte[in_bytes.length / 8][8];
+        for (int row = 0; row < in_bytes.length / 8; row++) {
+            for (int byte_in_row = 0; byte_in_row < 8; byte_in_row++) {
+                byte_matrix[row][byte_in_row] = in_bytes[8 * row + byte_in_row];
+            }
+        }
+
+        byte[][] decrypted_matrix = new byte[in_bytes.length / 8][8];
+        byte[][] subkeys = reverse_subkeys(this.subkeys);
+
+
+        for (int i = 0; i < byte_matrix.length; i++) {
+            decrypted_matrix[i] = encrypt_block(byte_matrix[i], subkeys);
+        }
+
+        byte[] ret = new byte[decrypted_matrix.length * 8];
+        for (int y = 0; y < decrypted_matrix.length; y++) {
+            for (int x = 0; x < 8; x++) {
+                ret[ y * 8 + x ] = decrypted_matrix[y][x];
+            }
+        }
+
+        return ret;
+    }
+
     public String decrypt_string(String string) {
 
         byte[] in_bytes = new byte[string.length() / 2];
@@ -89,8 +152,8 @@ public class DES {
             halves = round(halves, subkeys_6[i]);
         }
 
-        System.arraycopy(halves.left(), 0, ret, 0, 4);
-        System.arraycopy(halves.right(), 0, ret, 4, 4);
+        System.arraycopy(halves.left(), 0, ret, 4, 4);
+        System.arraycopy(halves.right(), 0, ret, 0, 4);
 
         ret = apply_permutation(ret, Util.FP);
         return ret;
@@ -119,14 +182,14 @@ public class DES {
         byte[] S_values = new byte[8];
         byte[] out = new byte[4];
 
-        indices[0] = block_6[0];
-        indices[1] = (byte) (block_6[0] << 6 | block_6[1] >> 2);
-        indices[2] = (byte) (block_6[1] << 4 | block_6[2] >> 4);
-        indices[3] = (byte) (block_6[2] << 2);
-        indices[4] = block_6[3];
-        indices[5] = (byte) (block_6[3] << 6 | block_6[4] >> 2);
-        indices[6] = (byte) (block_6[4] << 4 | block_6[5] >> 4);
-        indices[7] = (byte) (block_6[5] << 2);
+        indices[0] = (byte) (block_6[0] & 0b11111100);
+        indices[1] = (byte) ((((block_6[0] << 6) &0b11000000) | ((block_6[1] >> 2) & 0b00111111)) & 0b11111100);
+        indices[2] = (byte) ((((block_6[1] << 4) & 0xF0) | ((block_6[2] >> 4) & 0x0F)) & 0b11111100);
+        indices[3] = (byte) ((block_6[2] << 2) & 0b11111100);
+        indices[4] = (byte) (block_6[3] & 0b11111100);
+        indices[5] = (byte) ((((block_6[3] << 6) & 0b11000000) | ((block_6[4] >> 2) & 0b00111111)) & 0b11111100);
+        indices[6] = (byte) (((block_6[4] << 4) & 0xF0 | ((block_6[5] >> 4) & 0x0F)) & 0b11111100);
+        indices[7] = (byte) ((block_6[5] << 2) & 0b11111100);
 
         for (int i = 0; i < 8; i++) {
             indices[i] >>= 2;

@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class ViewUtil {
     static FileChooser getFileChooser() {
@@ -59,6 +60,20 @@ public class ViewUtil {
 
         try(FileWriter fw = new FileWriter(saveFile)){
             fw.write(fileContent);
+
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.YES).show();
+            return null;
+        }
+
+        return saveFile;
+    }
+
+    public static File saveFile(byte[] fileContent){
+        File saveFile = ViewUtil.getFileChooser("Select save path.").showSaveDialog(new Stage());
+
+        try {
+            Files.write(saveFile.toPath(), fileContent);
 
         } catch (IOException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.YES).show();
