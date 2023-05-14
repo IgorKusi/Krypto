@@ -1,7 +1,6 @@
 package pl.pkr.model;
 
 import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class Util {
@@ -9,16 +8,7 @@ public class Util {
         return new BigInteger(64, new Random());
     }
 
-    public record Pair<T>(T left, T right) {
-        public static <T> Pair<T> fromSPair(SPair<T> sPair) {
-            return new Pair<>(
-                    sPair.outer,
-                    sPair.inner
-            );
-        }
-    }
-
-    public record SPair<T>(T outer, T inner) {}
+    public record Pair<T>(T left, T right) {}
 
     public static final String HEX_STRING = "0123456789ABCDEF";
 
@@ -169,6 +159,18 @@ public class Util {
             sb.append(byte_to_hex(b));
 
         return sb.toString();
+    }
+
+    public static byte[] hex_to_bytes(String hexString) {
+        byte[] ret = new byte[hexString.length() / 2];
+
+        for (int i = 0; i < hexString.length(); i+=2)
+            ret[i / 2] = (byte) (
+                    (Character.digit(hexString.charAt(i), 16) << 4)
+                            + Character.digit(hexString.charAt(i + 1), 16)
+            );
+
+        return ret;
     }
 
 }

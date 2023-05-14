@@ -16,7 +16,7 @@ public class DES {
 
 
     public String encrypt_string(String string) {
-        byte[] string_bytes = string.getBytes();
+        byte[] string_bytes = string.getBytes(StandardCharsets.UTF_16BE);
         byte[] all_bytes = new byte[ string_bytes.length + 8 - (string_bytes.length % 8) ];
         System.arraycopy(string_bytes, 0, all_bytes, 0, string_bytes.length);
         byte[] in_buffer = new byte[8],
@@ -153,22 +153,26 @@ public class DES {
     public static byte[][] generate_subkeys(byte[] key_8) {
         byte[] stripped_key_56 = apply_permutation(key_8, Util.PC1);
         byte[][] subkeys = new byte[16][6];
+        byte[] left = selectBits(stripped_key_56, 0, 28),
+                    right = selectBits(stripped_key_56, 28, 28);
+//        System.arraycopy(stripped_key_56, 0, left, 0, 4);
+//        System.arraycopy(stripped_key_56, 3, right, 0, 4);
 
         for (int round = 0; round < 16; round++) {
-            byte[] left = new byte[4],
-                    right = new byte[4];
-            System.arraycopy(stripped_key_56, 0, left, 0, 4);
-            System.arraycopy(stripped_key_56, 3, right, 0, 4);
 
-            for (int j = 0; j < Util.bit_rot[round]; ++j) {
-                left = rotate_left(left, Half.LEFT);
-                right = rotate_left(right, Half.RIGHT);
+//            for (int j = 0; j < Util.bit_rot[round]; ++j) {
+//                left = rotate_left(left, Half.LEFT);
+//                right = rotate_left(right, Half.RIGHT);
+//            }
+            for (int j = 0; j < Util.bit_rot[round]; j++) {
+                left = shiftLeft(left, 1);
+                right = shiftLeft(right, 1);
             }
 
-            byte[] connected_56 = new byte[7];
+            byte[] connected_56 = new byte[8];
             for (int j = 0; j < 4; j++) {
-                connected_56[j] |= left[j];
-                connected_56[3 + j] |= right[j];
+                connected_56[j] = left[j];
+                connected_56[4 + j] = right[j];
             }
 
             subkeys[round] = apply_permutation(connected_56, Util.PC2);
@@ -203,12 +207,17 @@ public class DES {
         if (part == Half.LEFT) {
             //select first bit (MSB), that gets moved to last position
             byte msb = (byte) (ret[0] & 0b10000000);
+            byte temp_msb = 0;
 
-            for (int i = 0; i < 4; i++) {
-                ret[i] <<= 1;
-            }
             //clear second half of last byte for connection, also clear last position in the significant half to carry over MSB
             ret[3] &= 0b11100000;
+
+            for (int i = 0; i < 4; i++) {
+                if (i < 3) temp_msb = (byte) (((ret[i + 1] & 0b10000000) >> 7) & 1);
+                ret[i] <<= 1;
+                if (i < 3) ret[i] |= temp_msb;
+            }
+
             //shift msb to its target position
             msb >>= 3;
             //I hate java neither >> nor >>> fill with zeroes, so we have to clear other bits
@@ -219,9 +228,12 @@ public class DES {
         } else {
             //in right half, first half of the first byte is overlapped - MSB is on the 5th position
             byte msb = (byte) ( ret[0] & 0b00001000 );
+            byte temp_msb = 0;
 
             for (int i = 0; i < 4; i++) {
+                if (i < 3) temp_msb = (byte) (((ret[i + 1] & 0b10000000) >> 7) & 1);
                 ret[i] <<= 1;
+                if (i < 3) ret[i] |= temp_msb;
             }
             //make sure the last bit is ready to take the copied over MSB
             ret[3] &= 0b11111110;
@@ -246,6 +258,41 @@ public class DES {
         return ret;
     }
 
+
+     public static byte[] shiftLeft(byte[] in, int step)
+    {
+        byte[] out = new byte [in.length];
+        for (int i = 0; i < in.length * 8; i++)
+        {
+            setBit(out, i, getBit(in, (i + step) % (in.length * 8)));
+        }
+        return out;
+    }
+    
+     //pobiera bit z podanej pozycji w tablicy bajtów
+    public static int getBit(byte[] data, int pos)
+    {
+        return  data[pos / 8] >> (7 - (pos % 8)) & 1;
+    }
+
+    //ustawia lub kasuje bit na podanej pozycji w tablicy bajtow
+    public static void setBit(byte[] data, int pos, int val)
+    {
+        byte oldByte = data[pos / 8];
+        oldByte = (byte) (((0xFF7F >> (pos % 8)) & oldByte) & 0x00FF);
+        byte newByte = (byte) ((val << (7 - (pos % 8))) | oldByte);
+        data[pos / 8] = newByte;
+    }
+
+    public static byte[] selectBits(byte[] in, int pos, int len)
+    {
+        int numOfBytes = (len - 1) / 8 + 1;
+        byte[] out = new byte[numOfBytes];
+        for (int i = 0; i < len; i++) {
+            setBit(out, i, getBit(in, pos + i));
+        }
+        return out;
+    }
 
     
 }

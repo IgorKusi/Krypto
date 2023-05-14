@@ -42,17 +42,17 @@ public class CipherController {
         if (saveFile == null) return;
 
         try (BufferedReader br = new BufferedReader(new FileReader(saveFile))) {
-            BigInteger b = new BigInteger(br.readLine().toUpperCase().trim(), 16);
-            Static.key1 = b.toByteArray();
-            Static.s_key1 = b.toString(16).toUpperCase();
+            String line = br.readLine();
+            Static.s_key1 = line;
+            Static.key1 = Util.hex_to_bytes(line);
 
-            b = new BigInteger(br.readLine().toUpperCase().trim(), 16);
-            Static.key2 = b.toByteArray();
-            Static.s_key2 = b.toString(16).toUpperCase();
+            line = br.readLine();
+            Static.s_key2 = line;
+            Static.key2 = Util.hex_to_bytes(line);
 
-            b = new BigInteger(br.readLine().toUpperCase().trim(), 16);
-            Static.key3 = b.toByteArray();
-            Static.s_key3 = b.toString(16).toUpperCase();
+            line = br.readLine();
+            Static.s_key3 = line;
+            Static.key3 = Util.hex_to_bytes(line);
 
             txt_key1.setText(Static.s_key1);
             txt_key2.setText(Static.s_key2);
