@@ -51,7 +51,7 @@
          </font></TextArea>
       <Button fx:id="btn_encrypt" layoutX="288.0" layoutY="218.0" mnemonicParsing="false" onAction="#onEncryptButtonClick" text="Encrypt &gt;&gt;" />
       <Button fx:id="btn_decrypt" layoutX="383.0" layoutY="218.0" mnemonicParsing="false" onAction="#onDecryptButtonClick" text="&lt;&lt; Decrypt" />
-      <Label fx:id="txt_label1" layoutX="17.0" layoutY="778.0" prefHeight="17.0" prefWidth="651.0" text="Encrypt your files. Protect your future." />
+      <Label fx:id="txt_label1" layoutX="17.0" layoutY="776.0" prefHeight="17.0" prefWidth="651.0" text="Igor Kusideł - Grzegorz Ludziejewski" />
       <Separator layoutX="526.0" layoutY="43.0" orientation="VERTICAL" prefHeight="75.0" prefWidth="3.0" />
       <Separator layoutX="526.0" layoutY="158.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="6.0" />
       <Button fx:id="btn_file_encrypt" layoutX="157.0" layoutY="218.0" mnemonicParsing="false" onAction="#onEncryptFileButtonClick" text="Encrypt from file &gt;&gt;" />
