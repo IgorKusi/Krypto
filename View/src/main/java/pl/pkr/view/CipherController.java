@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import pl.pkr.model.DES;
+import pl.pkr.model.DESX;
 import pl.pkr.model.Util;
 
 import java.io.*;
@@ -23,16 +24,12 @@ public class CipherController {
     public TextField txt_key3;
 
 
-        public void onGenKeysButtonClick() {
-        BigInteger b = Util.generateKey();
-        Static.key1 = b.toByteArray();
-        Static.s_key1 = b.toString(16).toUpperCase();
-        b = Util.generateKey();
-        Static.key2 = b.toByteArray();
-        Static.s_key2 = b.toString(16).toUpperCase();
-        b = Util.generateKey();
-        Static.key3 = b.toByteArray();
-        Static.s_key3 = b.toString(16).toUpperCase();
+    public void onGenKeysButtonClick() {
+        Static.loadKeys(
+                Util.generateKey(),
+                Util.generateKey(),
+                Util.generateKey()
+        );
 
         txt_key1.setText(Static.s_key1);
         txt_key2.setText(Static.s_key2);
@@ -44,17 +41,11 @@ public class CipherController {
         if (saveFile == null) return;
 
         try (BufferedReader br = new BufferedReader(new FileReader(saveFile))) {
-            String line = br.readLine();
-            Static.s_key1 = line;
-            Static.key1 = Util.hex_to_bytes(line);
-
-            line = br.readLine();
-            Static.s_key2 = line;
-            Static.key2 = Util.hex_to_bytes(line);
-
-            line = br.readLine();
-            Static.s_key3 = line;
-            Static.key3 = Util.hex_to_bytes(line);
+            Static.loadKeys(
+                br.readLine(),
+                br.readLine(),
+                br.readLine()
+            );
 
             txt_key1.setText(Static.s_key1);
             txt_key2.setText(Static.s_key2);
@@ -109,35 +100,65 @@ public class CipherController {
 
 
     public void onEncryptButtonClick() {
-            DES des = new DES(Static.key1);
-            String ciphertext = des.encrypt_string(txt_area_plaintext.getText());
-            txt_area_ciphertext.setText(ciphertext);
+        Static.loadKeys(
+                txt_key1.getText(),
+                txt_key2.getText(),
+                txt_key3.getText()
+        );
+
+        DES des = new DESX(Static.key1, Static.key2, Static.key3);
+        String ciphertext = des.encrypt_string(txt_area_plaintext.getText());
+        txt_area_ciphertext.setText(ciphertext);
     }
 
     public void onDecryptButtonClick() {
-            DES des = new DES(Static.key1);
-            String plaintext = des.decrypt_string(txt_area_ciphertext.getText());
-            txt_area_plaintext.setText(plaintext);
+        Static.loadKeys(
+                txt_key1.getText(),
+                txt_key2.getText(),
+                txt_key3.getText()
+        );
+
+        DES des = new DESX(Static.key1, Static.key2, Static.key3);
+        String plaintext = des.decrypt_string(txt_area_ciphertext.getText());
+        txt_area_plaintext.setText(plaintext);
     }
 
 
     public void onEncryptFileButtonClick(ActionEvent actionEvent) throws IOException {
-        DES des = new DES(Static.key1);
+        Static.loadKeys(
+                txt_key1.getText(),
+                txt_key2.getText(),
+                txt_key3.getText()
+        );
+
+        DES des = new DESX(Static.key1, Static.key2, Static.key3);
         File loadFile = ViewUtil.getFileChooser("Select file to load.").showOpenDialog(new Stage());
-        String plaintext = ViewUtil.readFile(loadFile);
+        byte[] fBytes = Files.readAllBytes(loadFile.toPath());
+
+        String plaintext = new String(fBytes);
         txt_area_plaintext.setText(plaintext);
-        byte[] bytes = Files.readAllBytes(loadFile.toPath());
-        String ciphertext = des.encrypt_bytes(bytes);
+
+        String ciphertext = des.encrypt_bytes(fBytes);
+
         txt_area_ciphertext.setText(ciphertext);
         ViewUtil.saveFile(ciphertext);
     }
 
     public void onDecryptFileButtonClick(ActionEvent actionEvent) {
-        DES des = new DES(Static.key1);
+        Static.loadKeys(
+                txt_key1.getText(),
+                txt_key2.getText(),
+                txt_key3.getText()
+        );
+
+        DES des = new DESX(Static.key1, Static.key2, Static.key3);
         File loadFile = ViewUtil.getFileChooser("Select file to load.").showOpenDialog(new Stage());
+
         String ciphertext = ViewUtil.readFile(loadFile);
         txt_area_ciphertext.setText(ciphertext);
+
         byte[] plaintext = des.decrypt_to_bytes(ciphertext);
+
         txt_area_plaintext.setText(new String(plaintext));
         ViewUtil.saveFile(plaintext);
     }

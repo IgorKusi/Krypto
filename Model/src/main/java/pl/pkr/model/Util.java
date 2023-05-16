@@ -1,11 +1,15 @@
 package pl.pkr.model;
 
-import java.math.BigInteger;
 import java.util.*;
 
 public class Util {
-    public static BigInteger generateKey() {
-        return new BigInteger(64, new Random());
+    public static String generateKey() {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder(16);
+        for (int i = 0; i < 16; i++) {
+            sb.append(HEX_STRING.charAt(random.nextInt(16)));
+        }
+        return sb.toString();
     }
 
     public record Pair<T>(T left, T right) {}
