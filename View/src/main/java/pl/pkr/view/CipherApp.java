@@ -16,7 +16,7 @@ public class CipherApp extends Application {
     public void start(Stage stage) throws IOException {
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(CipherApp.class.getResource("cipher-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(CipherApp.class.getResource("backpack-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setResizable(false);
         stage.setTitle("DES-X Cipher Tool");

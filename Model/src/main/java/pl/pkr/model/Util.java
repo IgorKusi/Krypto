@@ -3,7 +3,7 @@ package pl.pkr.model;
 import java.util.*;
 
 public class Util {
-    public static String generateKey() {
+    public static String generateDesKey() {
         Random random = new Random();
         StringBuilder sb = new StringBuilder(16);
         for (int i = 0; i < 16; i++) {
@@ -173,6 +173,16 @@ public class Util {
                     (Character.digit(hexString.charAt(i), 16) << 4)
                             + Character.digit(hexString.charAt(i + 1), 16)
             );
+
+        return ret;
+    }
+
+    public static <T> T[] reverseArray(T[] arr) {
+        int len = arr.length;
+        T[] ret = Arrays.copyOf(arr, len);
+        for (int i = 0; i < len; i++) {
+            ret[i] = arr[len - i - 1];
+        }
 
         return ret;
     }

@@ -271,7 +271,7 @@ public class DES {
             byte[] connected_56 = new byte[ 8 ];
             for (int j = 0; j < 4; j++) {
                 connected_56[ j ] = left[ j ];
-                connected_56[ 4 + j ] = right[ j ];
+                connected_56[ 3 + j ] = right[ j ];
             }
 
             subkeys[ round ] = apply_permutation(connected_56, Util.PC2);

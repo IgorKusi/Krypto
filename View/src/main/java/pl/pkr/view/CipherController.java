@@ -2,17 +2,13 @@ package pl.pkr.view;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import pl.pkr.model.DES;
 import pl.pkr.model.DESX;
 import pl.pkr.model.Util;
 
 import java.io.*;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.BitSet;
 
 public class CipherController {
     public TextField txt_plain_path;
@@ -26,9 +22,9 @@ public class CipherController {
 
     public void onGenKeysButtonClick() {
         Static.loadKeys(
-                Util.generateKey(),
-                Util.generateKey(),
-                Util.generateKey()
+                Util.generateDesKey(),
+                Util.generateDesKey(),
+                Util.generateDesKey()
         );
 
         txt_key1.setText(Static.s_key1);
