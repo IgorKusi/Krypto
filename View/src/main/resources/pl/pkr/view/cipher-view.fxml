@@ -56,6 +56,6 @@
       <Separator layoutX="526.0" layoutY="158.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="6.0" />
       <Button fx:id="btn_file_encrypt" layoutX="157.0" layoutY="218.0" mnemonicParsing="false" onAction="#onEncryptFileButtonClick" text="Encrypt from file &gt;&gt;" />
       <Button fx:id="btn_file_decrypt" layoutX="470.0" layoutY="218.0" mnemonicParsing="false" onAction="#onDecryptFileButtonClick" text="&lt;&lt; Decrypt from file" />
-      <Button fx:id="btn_switch_backpack" layoutX="543.0" layoutY="9.0" mnemonicParsing="false" onMouseClicked="#onSwitchBackpackButtonClick" prefHeight="25.0" prefWidth="193.0" text="Switch to Backpack" />
+      <Button fx:id="btn_switch_backpack" layoutX="543.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#onSwitchBackpackButtonClick" prefHeight="3.0" prefWidth="193.0" text="Switch to Backpack" />
    </children>
 </Pane>

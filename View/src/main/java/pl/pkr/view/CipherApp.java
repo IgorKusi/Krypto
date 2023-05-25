@@ -1,5 +1,3 @@
-//TODO parse as binary string lol xdxd xd xd
-
 package pl.pkr.view;
 
 
@@ -20,7 +18,7 @@ public class CipherApp extends Application {
 
         stejcz = stage;
         backpackScene = new Scene( new FXMLLoader(CipherApp.class.getResource("backpack-view.fxml")).load());
-        DESXScene = new Scene( new FXMLLoader(CipherApp.class.getResource("cypher-view.fxml")).load());
+        DESXScene = new Scene( new FXMLLoader(CipherApp.class.getResource("cipher-view.fxml")).load());
         stage.setResizable(false);
         stage.setTitle("Cipher Tool by GL, IK - FTIMS 2023");
         stage.setScene(backpackScene);
