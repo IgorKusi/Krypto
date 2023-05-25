@@ -2,6 +2,7 @@ package pl.pkr.view;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import pl.pkr.model.DES;
 import pl.pkr.model.DESX;
@@ -157,5 +158,9 @@ public class CipherController {
 
         txt_area_plaintext.setText(new String(plaintext));
         ViewUtil.saveFile(plaintext);
+    }
+
+    public void onSwitchBackpackButtonClick(MouseEvent mouseEvent) {
+        CipherApp.switchScenetoBackpack();
     }
 }

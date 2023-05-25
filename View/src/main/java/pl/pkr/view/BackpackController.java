@@ -1,6 +1,9 @@
 package pl.pkr.view;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -13,6 +16,11 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class BackpackController {
+    private Scene scene;
+    private Parent root;
+
+    private Stage stage;
+
 
     public TextField txt_key1;
     public TextField txt_key2;
@@ -87,5 +95,9 @@ public class BackpackController {
     }
 
     public void onDecryptFileButtonClick(ActionEvent actionEvent) {
+    }
+
+    public void onSwitchDesxButtonClick(MouseEvent mouseEvent) throws IOException {
+        CipherApp.switchScenetoDesX();
     }
 }

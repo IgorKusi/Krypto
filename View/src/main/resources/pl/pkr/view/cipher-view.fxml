@@ -28,7 +28,7 @@
       <Label layoutX="15.0" layoutY="14.0" prefHeight="17.0" prefWidth="102.0" text="Keys" />
       <Label layoutX="14.0" layoutY="135.0" prefHeight="17.0" prefWidth="136.0" text="Files &amp; Encryption" />
       <Separator layoutX="117.0" layoutY="142.0" prefHeight="0.0" prefWidth="609.0" />
-      <Separator layoutX="47.0" layoutY="21.0" prefHeight="3.0" prefWidth="683.0" />
+      <Separator layoutX="47.0" layoutY="21.0" prefHeight="3.0" prefWidth="479.0" />
       <TextField fx:id="txt_plain_path" layoutX="14.0" layoutY="159.0" prefHeight="25.0" prefWidth="500.0" promptText="Plaintext filepath">
          <font>
             <Font name="Monospaced Regular" size="12.0" />
@@ -56,5 +56,6 @@
       <Separator layoutX="526.0" layoutY="158.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="6.0" />
       <Button fx:id="btn_file_encrypt" layoutX="157.0" layoutY="218.0" mnemonicParsing="false" onAction="#onEncryptFileButtonClick" text="Encrypt from file &gt;&gt;" />
       <Button fx:id="btn_file_decrypt" layoutX="470.0" layoutY="218.0" mnemonicParsing="false" onAction="#onDecryptFileButtonClick" text="&lt;&lt; Decrypt from file" />
+      <Button fx:id="btn_switch_backpack" layoutX="543.0" layoutY="9.0" mnemonicParsing="false" onMouseClicked="#onSwitchBackpackButtonClick" prefHeight="25.0" prefWidth="193.0" text="Switch to Backpack" />
    </children>
 </Pane>

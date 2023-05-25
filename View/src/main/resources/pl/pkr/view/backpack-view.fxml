@@ -10,15 +10,11 @@
 
 <Pane maxHeight="800.0" maxWidth="750.0" minHeight="800.0" minWidth="750.0" prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.pkr.view.BackpackController">
    <children>
-      <TextField fx:id="txt_key1" layoutX="15.0" layoutY="41.0" prefHeight="25.0" prefWidth="500.0" promptText="Key 1">
+      <TextField fx:id="txt_key1" layoutX="15.0" layoutY="41.0" prefHeight="37.0" prefWidth="500.0" promptText="Key 1">
          <font>
             <Font name="Monospaced Regular" size="12.0" />
          </font></TextField>
-      <TextField fx:id="txt_key2" layoutX="15.0" layoutY="66.0" prefHeight="25.0" prefWidth="500.0" promptText="Key 2">
-         <font>
-            <Font name="Monospaced Regular" size="12.0" />
-         </font></TextField>
-      <TextField fx:id="txt_key3" layoutX="15.0" layoutY="91.0" prefHeight="25.0" prefWidth="500.0" promptText="Key 3">
+      <TextField fx:id="txt_key2" layoutX="15.0" layoutY="79.0" prefHeight="37.0" prefWidth="500.0" promptText="Key 2">
          <font>
             <Font name="Monospaced Regular" size="12.0" />
          </font></TextField>
@@ -28,7 +24,7 @@
       <Label layoutX="15.0" layoutY="14.0" prefHeight="17.0" prefWidth="102.0" text="Keys" />
       <Label layoutX="14.0" layoutY="135.0" prefHeight="17.0" prefWidth="136.0" text="Files &amp; Encryption" />
       <Separator layoutX="117.0" layoutY="142.0" prefHeight="0.0" prefWidth="609.0" />
-      <Separator layoutX="47.0" layoutY="21.0" prefHeight="3.0" prefWidth="683.0" />
+      <Separator layoutX="47.0" layoutY="21.0" prefHeight="3.0" prefWidth="479.0" />
       <TextField fx:id="txt_plain_path" layoutX="14.0" layoutY="159.0" prefHeight="25.0" prefWidth="500.0" promptText="Plaintext filepath">
          <font>
             <Font name="Monospaced Regular" size="12.0" />
@@ -56,5 +52,6 @@
       <Separator layoutX="526.0" layoutY="158.0" orientation="VERTICAL" prefHeight="52.0" prefWidth="6.0" />
       <Button fx:id="btn_file_encrypt" layoutX="157.0" layoutY="218.0" mnemonicParsing="false" onAction="#onEncryptFileButtonClick" text="Encrypt from file &gt;&gt;" />
       <Button fx:id="btn_file_decrypt" layoutX="470.0" layoutY="218.0" mnemonicParsing="false" onAction="#onDecryptFileButtonClick" text="&lt;&lt; Decrypt from file" />
+      <Button fx:id="btn_switch_desx" layoutX="543.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#onSwitchDesxButtonClick" prefHeight="3.0" prefWidth="193.0" text="Switch to DESX" />
    </children>
 </Pane>
