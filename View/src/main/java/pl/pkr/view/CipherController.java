@@ -22,15 +22,15 @@ public class CipherController {
 
 
     public void onGenKeysButtonClick() {
-        Static.loadKeys(
+        Static.loadDesKeys(
                 Util.generateDesKey(),
                 Util.generateDesKey(),
                 Util.generateDesKey()
         );
 
-        txt_key1.setText(Static.s_key1);
-        txt_key2.setText(Static.s_key2);
-        txt_key3.setText(Static.s_key3);
+        txt_key1.setText(Static.des_s_key1);
+        txt_key2.setText(Static.des_s_key2);
+        txt_key3.setText(Static.des_s_key3);
     }
 
     public void onLoadKeysButtonClick() {
@@ -38,15 +38,15 @@ public class CipherController {
         if (saveFile == null) return;
 
         try (BufferedReader br = new BufferedReader(new FileReader(saveFile))) {
-            Static.loadKeys(
+            Static.loadDesKeys(
                 br.readLine(),
                 br.readLine(),
                 br.readLine()
             );
 
-            txt_key1.setText(Static.s_key1);
-            txt_key2.setText(Static.s_key2);
-            txt_key3.setText(Static.s_key3);
+            txt_key1.setText(Static.des_s_key1);
+            txt_key2.setText(Static.des_s_key2);
+            txt_key3.setText(Static.des_s_key3);
 
         } catch (IOException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.NO).show();
@@ -58,11 +58,11 @@ public class CipherController {
         if (saveFile == null) return;
 
         try (FileWriter fw = new FileWriter(saveFile)) {
-            fw.write(Static.s_key1);
+            fw.write(Static.des_s_key1);
             fw.write("\n");
-            fw.write(Static.s_key2);
+            fw.write(Static.des_s_key2);
             fw.write("\n");
-            fw.write(Static.s_key3);
+            fw.write(Static.des_s_key3);
             fw.write("\n");
             fw.flush();
 
@@ -97,38 +97,38 @@ public class CipherController {
 
 
     public void onEncryptButtonClick() {
-        Static.loadKeys(
+        Static.loadDesKeys(
                 txt_key1.getText(),
                 txt_key2.getText(),
                 txt_key3.getText()
         );
 
-        DES des = new DESX(Static.key1, Static.key2, Static.key3);
+        DES des = new DESX(Static.des_key1, Static.des_key2, Static.des_key3);
         String ciphertext = des.encrypt_string(txt_area_plaintext.getText());
         txt_area_ciphertext.setText(ciphertext);
     }
 
     public void onDecryptButtonClick() {
-        Static.loadKeys(
+        Static.loadDesKeys(
                 txt_key1.getText(),
                 txt_key2.getText(),
                 txt_key3.getText()
         );
 
-        DES des = new DESX(Static.key1, Static.key2, Static.key3);
+        DES des = new DESX(Static.des_key1, Static.des_key2, Static.des_key3);
         String plaintext = des.decrypt_string(txt_area_ciphertext.getText());
         txt_area_plaintext.setText(plaintext);
     }
 
 
     public void onEncryptFileButtonClick(ActionEvent actionEvent) throws IOException {
-        Static.loadKeys(
+        Static.loadDesKeys(
                 txt_key1.getText(),
                 txt_key2.getText(),
                 txt_key3.getText()
         );
 
-        DES des = new DESX(Static.key1, Static.key2, Static.key3);
+        DES des = new DESX(Static.des_key1, Static.des_key2, Static.des_key3);
         File loadFile = ViewUtil.getFileChooser("Select file to load.").showOpenDialog(new Stage());
         byte[] fBytes = Files.readAllBytes(loadFile.toPath());
 
@@ -142,13 +142,13 @@ public class CipherController {
     }
 
     public void onDecryptFileButtonClick(ActionEvent actionEvent) {
-        Static.loadKeys(
+        Static.loadDesKeys(
                 txt_key1.getText(),
                 txt_key2.getText(),
                 txt_key3.getText()
         );
 
-        DES des = new DESX(Static.key1, Static.key2, Static.key3);
+        DES des = new DESX(Static.des_key1, Static.des_key2, Static.des_key3);
         File loadFile = ViewUtil.getFileChooser("Select file to load.").showOpenDialog(new Stage());
 
         String ciphertext = ViewUtil.readFile(loadFile);

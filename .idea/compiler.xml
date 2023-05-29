@@ -10,5 +10,10 @@
         <module name="View" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Krypto" target="17" />
+      <module name="Model" target="17" />
+      <module name="View" target="9" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -16,12 +16,12 @@ public class Backpack implements Serializable {
         generateKeys();
     }
 
-    public Backpack(BigInteger[] publicKey, BigInteger[] privateKey, BigInteger M, BigInteger W, BigInteger W_1) {
+    public Backpack(BigInteger[] publicKey, BigInteger[] privateKey, BigInteger M, BigInteger W_1) {
         this.publicKey = publicKey;
         this.privateKey = privateKey;
         this.M = M;
-        this.W = W;
         this.W_1 = W_1;
+        this.W = W_1.modInverse(M);
     }
 
     public BigInteger getM() {
@@ -71,6 +71,32 @@ public class Backpack implements Serializable {
             if ( (b & (1 << i)) != 0 ) {
                 ret = ret.add(publicKey[ i ]);
             }
+        }
+
+        return ret;
+    }
+
+    public byte[] decryptBytes(BigInteger[] cargo) {
+        byte[] ret = new byte[cargo.length];
+
+        for (int i = 0; i < cargo.length; i++) {
+            ret[i] = decryptByte(cargo[i]);
+        }
+
+        return ret;
+    }
+
+    public byte decryptByte(BigInteger cargo) {
+        BigInteger sum = cargo.multiply(W_1).mod(M);
+
+        byte ret = 0;
+        for (int i = privateKey.length - 1; i >= 0; i--) {
+            if (sum.compareTo(privateKey[i]) >= 0) {
+                sum = sum.subtract(privateKey[i]);
+                ret |= 1;
+            }
+
+            if (i != 0) ret <<= 1;
         }
 
         return ret;

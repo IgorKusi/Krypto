@@ -10,11 +10,11 @@
 
 <Pane maxHeight="800.0" maxWidth="750.0" minHeight="800.0" minWidth="750.0" prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.pkr.view.BackpackController">
    <children>
-      <TextField fx:id="txt_key1" layoutX="15.0" layoutY="41.0" prefHeight="37.0" prefWidth="500.0" promptText="Key 1">
+      <TextField fx:id="txt_keyPri" layoutX="15.0" layoutY="66.0" prefHeight="25.0" prefWidth="500.0" promptText="Private Superincreasing array">
          <font>
             <Font name="Monospaced Regular" size="12.0" />
          </font></TextField>
-      <TextField fx:id="txt_key2" layoutX="15.0" layoutY="79.0" prefHeight="37.0" prefWidth="500.0" promptText="Key 2">
+      <TextField fx:id="txt_keyPub" layoutX="15.0" layoutY="91.0" prefHeight="25.0" prefWidth="500.0" promptText="Public array">
          <font>
             <Font name="Monospaced Regular" size="12.0" />
          </font></TextField>
@@ -53,5 +53,15 @@
       <Button fx:id="btn_file_encrypt" layoutX="157.0" layoutY="218.0" mnemonicParsing="false" onAction="#onEncryptFileButtonClick" text="Encrypt from file &gt;&gt;" />
       <Button fx:id="btn_file_decrypt" layoutX="470.0" layoutY="218.0" mnemonicParsing="false" onAction="#onDecryptFileButtonClick" text="&lt;&lt; Decrypt from file" />
       <Button fx:id="btn_switch_desx" layoutX="543.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#onSwitchDesxButtonClick" prefHeight="3.0" prefWidth="193.0" text="Switch to DESX" />
+      <TextField fx:id="txt_M" layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="245.0" promptText="M">
+         <font>
+            <Font name="Monospaced Regular" size="12.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txt_W1" layoutX="270.0" layoutY="41.0" prefHeight="25.0" prefWidth="245.0" promptText="W^(-1) (mod M)">
+         <font>
+            <Font name="Monospaced Regular" size="12.0" />
+         </font>
+      </TextField>
    </children>
 </Pane>

@@ -4,17 +4,66 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7d513fdd-a20e-4a65-8da5-bd98c61fc255" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/View/src/main/java/pl/pkr/view/CipherApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/pl/pkr/view/CipherApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/src/main/resources/pl/pkr/view/cipher-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/resources/pl/pkr/view/cipher-view.fxml" afterDir="false" />
+    <list default="true" id="68e9ce67-fecc-4950-9617-f6dd20cca43b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/src/main/java/pl/pkr/model/Backpack.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/src/main/java/pl/pkr/model/Backpack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/src/main/java/pl/pkr/model/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/src/main/java/pl/pkr/model/Util.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Model/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/java/pl/pkr/view/BackpackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/pl/pkr/view/BackpackController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/java/pl/pkr/view/CipherController.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/pl/pkr/view/CipherController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/java/pl/pkr/view/Static.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/pl/pkr/view/Static.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/java/pl/pkr/view/ViewUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/pl/pkr/view/ViewUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/resources/pl/pkr/view/backpack-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/resources/pl/pkr/view/backpack-view.fxml" afterDir="false" />
+    </list>
+    <list id="f3464486-1a41-4bdf-8dee-a9cb818efd47" name="Changes by igor" comment="">
+      <change beforePath="$PROJECT_DIR$/View/src/main/java/pl/pkr/view/BackpackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/pl/pkr/view/BackpackController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$PROJECT_DIR$/../../Eclipse Adoptium/jdk-17.0.5.8-hotspot/lib/src.zip!/java.base/java/io/File.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/View/src/main/java/pl/pkr/view/BackpackController.java">
+      <ranges>
+        <range start1="3" end1="4" start2="3" end2="3" changelist="68e9ce67-fecc-4950-9617-f6dd20cca43b" />
+        <range start1="10" end1="10" start2="9" end2="12" changelist="68e9ce67-fecc-4950-9617-f6dd20cca43b" />
+        <range start1="15" end1="15" start2="17" end2="19" changelist="68e9ce67-fecc-4950-9617-f6dd20cca43b" />
+        <range start1="18" end1="27" start2="22" end2="26" changelist="68e9ce67-fecc-4950-9617-f6dd20cca43b" />
+        <range start1="46" end1="48" start2="45" end2="54" changelist="68e9ce67-fecc-4950-9617-f6dd20cca43b" />
+        <range start1="51" end1="53" start2="57" end2="59" changelist="68e9ce67-fecc-4950-9617-f6dd20cca43b" />
+        <range start1="54" end1="59" start2="60" end2="63" changelist="68e9ce67-fecc-4950-9617-f6dd20cca43b" />
+        <range start1="60" end1="62" start2="64" end2="71" changelist="68e9ce67-fecc-4950-9617-f6dd20cca43b" />
+        <range start1="69" end1="70" start2="78" end2="83" changelist="68e9ce67-fecc-4950-9617-f6dd20cca43b" />
+        <range start1="72" end1="73" start2="85" end2="89" changelist="f3464486-1a41-4bdf-8dee-a9cb818efd47" />
+        <range start1="75" end1="76" start2="91" end2="95" changelist="f3464486-1a41-4bdf-8dee-a9cb818efd47" />
+        <range start1="78" end1="79" start2="97" end2="101" changelist="f3464486-1a41-4bdf-8dee-a9cb818efd47" />
+        <range start1="81" end1="82" start2="103" end2="107" changelist="f3464486-1a41-4bdf-8dee-a9cb818efd47" />
+        <range start1="85" end1="86" start2="110" end2="116" changelist="68e9ce67-fecc-4950-9617-f6dd20cca43b" />
+        <range start1="90" end1="90" start2="120" end2="129" changelist="68e9ce67-fecc-4950-9617-f6dd20cca43b" />
+        <range start1="92" end1="93" start2="131" end2="140" changelist="68e9ce67-fecc-4950-9617-f6dd20cca43b" />
+        <range start1="94" end1="94" start2="141" end2="148" changelist="68e9ce67-fecc-4950-9617-f6dd20cca43b" />
+        <range start1="97" end1="97" start2="151" end2="166" changelist="68e9ce67-fecc-4950-9617-f6dd20cca43b" />
+      </ranges>
+    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -25,52 +74,255 @@
         <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="workspaceImportEnabled" value="true" />
-      </MavenImportingSettings>
-    </option>
   </component>
-  <component name="ProjectId" id="2QHYH61JQdgvnBaV5VWG7l2epGF" />
+  <component name="ProjectId" id="2MjcgEn4IOvjECxJd0crRlsxRDd" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;packageLocal&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;temurin-17&quot;,
+    &quot;last_directory_selection&quot;: &quot;D:/PKR/Krypto/View/src/main/java/pl/pkr/view&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/PKR/Krypto/View/src/main/resources/pl/pkr/view&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager">
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\PKR\Krypto\View\src\main\resources\pl\pkr\view" />
+      <recent name="D:\PKR\Krypto" />
+    </key>
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="ViewUtil" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="pl.pkr.view" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.CipherApp">
+    <configuration name="CipherApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="temurin-17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="pl.pkr.view.CipherApp" />
       <module name="View" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pl.pkr.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DesTests.apply_IP_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Model" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DesTests" />
+      <option name="METHOD_NAME" value="apply_IP_test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DesTests.permutation_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Model" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DesTests" />
+      <option name="METHOD_NAME" value="permutation_test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DesTests.rotate_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Model" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DesTests" />
+      <option name="METHOD_NAME" value="rotate_test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DesTests.subkey_test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Model" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DesTests" />
+      <option name="METHOD_NAME" value="subkey_test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.CipherApp" />
+      <item itemvalue="JUnit.DesTests.apply_IP_test" />
+      <item itemvalue="JUnit.DesTests.permutation_test" />
+      <item itemvalue="JUnit.DesTests.rotate_test" />
+      <item itemvalue="JUnit.DesTests.subkey_test" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.CipherApp" />
+        <item itemvalue="JUnit.DesTests.subkey_test" />
+        <item itemvalue="JUnit.DesTests.rotate_test" />
+        <item itemvalue="JUnit.DesTests.permutation_test" />
+        <item itemvalue="JUnit.DesTests.apply_IP_test" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7d513fdd-a20e-4a65-8da5-bd98c61fc255" name="Changes" comment="" />
-      <created>1685011885467</created>
+      <changelist id="68e9ce67-fecc-4950-9617-f6dd20cca43b" name="Changes" comment="" />
+      <created>1678284541905</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1685011885467</updated>
-      <workItem from="1685011889529" duration="1203000" />
+      <updated>1678284541905</updated>
+      <workItem from="1678284543180" duration="1118000" />
+      <workItem from="1678285668602" duration="4565000" />
+      <workItem from="1678292247989" duration="4689000" />
+      <workItem from="1678360558280" duration="1508000" />
+      <workItem from="1678399982146" duration="1205000" />
+      <workItem from="1678879031839" duration="20406000" />
+      <workItem from="1678964365790" duration="4517000" />
+      <workItem from="1678970869361" duration="331000" />
+      <workItem from="1678978850739" duration="18587000" />
+      <workItem from="1679004666387" duration="27000" />
+      <workItem from="1679061290936" duration="5625000" />
+      <workItem from="1679067331113" duration="332000" />
+      <workItem from="1679087523520" duration="969000" />
+      <workItem from="1679161890858" duration="9000" />
+      <workItem from="1679312540661" duration="2052000" />
+      <workItem from="1679403866357" duration="2979000" />
+      <workItem from="1679407789083" duration="27000" />
+      <workItem from="1679433405540" duration="39000" />
+      <workItem from="1679484678310" duration="17077000" />
+      <workItem from="1679525999359" duration="113000" />
+      <workItem from="1679569873764" duration="4937000" />
+      <workItem from="1679588940339" duration="602000" />
+      <workItem from="1679920782235" duration="3027000" />
+      <workItem from="1679924835943" duration="2047000" />
+      <workItem from="1680006051156" duration="15169000" />
+      <workItem from="1680130132768" duration="9000" />
+      <workItem from="1680189693311" duration="96000" />
+      <workItem from="1680309348827" duration="8000" />
+      <workItem from="1680525201724" duration="1603000" />
+      <workItem from="1680551281419" duration="1224000" />
+      <workItem from="1680622108390" duration="7000" />
+      <workItem from="1681314591793" duration="259000" />
+      <workItem from="1681677283692" duration="1615000" />
+      <workItem from="1682593047589" duration="6958000" />
+      <workItem from="1682628183561" duration="620000" />
+      <workItem from="1684062518449" duration="13772000" />
+      <workItem from="1684076873882" duration="30000" />
+      <workItem from="1684098005930" duration="9178000" />
+      <workItem from="1684146500051" duration="531000" />
+      <workItem from="1684153554047" duration="526000" />
+      <workItem from="1684186466928" duration="9259000" />
+      <workItem from="1684238740230" duration="2185000" />
+      <workItem from="1684357248452" duration="1116000" />
+      <workItem from="1684358454545" duration="182000" />
+      <workItem from="1684764073501" duration="1607000" />
+      <workItem from="1684929883512" duration="5843000" />
+      <workItem from="1685010785810" duration="5000" />
+      <workItem from="1685012003469" duration="175000" />
+      <workItem from="1685321718094" duration="353000" />
+      <workItem from="1685322085139" duration="1032000" />
+      <workItem from="1685357591320" duration="4963000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Model/src/main/java/pl/pkr/model/DES.java</url>
+          <line>107</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Model/src/main/java/pl/pkr/model/DES.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Model/src/main/java/pl/pkr/model/DES.java</url>
+          <line>103</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Model/src/main/java/pl/pkr/model/DES.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Model/src/main/java/pl/pkr/model/DES.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Model/src/main/java/pl/pkr/model/DES.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/View/src/main/java/pl/pkr/view/BackpackController.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="half_4[3]" language="JAVA" />
+      </configuration>
+      <configuration name="Application">
+        <watch expression="byte_matrix[ byte_matrix.length - 1 ][ 7 ]" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Krypto$DesTests_int_to_bit4_test.ic" NAME="DesTests.int_to_bit4_test Coverage Results" MODIFIED="1678989835024" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

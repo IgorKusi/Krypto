@@ -24,6 +24,7 @@ public class ViewUtil {
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("key files (.keys)", "*.keys"));
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("text files (.txt)", "*.txt"));
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("encrypted files (.desx)", "*.desx"));
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("encrypted files (.bp)", "*.bp"));
         return fc;
     }
 
